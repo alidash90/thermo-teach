@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><script>(function(){var P='stage_cur',K=P+':'+location.pathname,S=Storage.prototype,g=S.getItem,s=S.setItem;S.getItem=function(k){return g.call(this,k===P?K:k)};S.setItem=function(k,x){return s.call(this,k===P?K:k,x)}})();</script><link rel="stylesheet" href="../../../assets/stage-skin.css?v=607d3d00"><script src="../../../assets/stage-skin.js?v=607d3d00" defer></script>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><script>(function(){var P='stage_cur',K=P+':'+location.pathname,S=Storage.prototype,g=S.getItem,s=S.setItem;S.getItem=function(k){return g.call(this,k===P?K:k)};S.setItem=function(k,x){return s.call(this,k===P?K:k,x)}})();</script><link rel="stylesheet" href="../../../assets/stage-skin.css?v=1ae83030"><script src="../../../assets/stage-skin.js?v=1ae83030" defer></script>
 <title>MECH330 Lecture 2 Stage</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
@@ -625,8 +625,9 @@ function makeDomeMap(md,mini){
     const f=(T-a[0])/((b[0]-a[0])||1); return X(a[wi])+f*(X(b[wi])-X(a[wi])); }
   // isobars: schematic constant-P curves, drawn under everything
   (md.isobars||[]).forEach(b=>{ const T=b.T, xf=edgeX(T,1), xg=edgeX(T,2), y=Y(T), col=b.col||C.mu;
-    const yBot=H-mb-6, xEnd=Math.min(xg+170,W-mr-6), yEnd=Math.max(y-85,mt+14);
-    el('path',{d:`M${xf-12},${yBot} Q${xf-6},${y+26} ${xf},${y} L${xg},${y} Q${xg+60},${y-6} ${xEnd},${yEnd}`,fill:'none',stroke:col,'stroke-width':mini?3.5:2.2,'stroke-dasharray':'7 5',opacity:0.9});
+    const xEnd=Math.min(xg+170,W-mr-6), yEnd=Math.max(y-85,mt+14);
+    const leg=[]; for(let dT=55;dT>=4;dT-=10){ const tt=T-dT; if(tt<F.Tmin+2) continue; leg.push((edgeX(tt,1)-14)+','+Y(tt)); }
+    el('path',{d:'M'+(leg.length?leg.join(' L')+' L':'')+`${xf},${y} L${xg},${y} Q${xg+60},${y-6} ${xEnd},${yEnd}`,fill:'none',stroke:col,'stroke-width':mini?3.5:2.2,'stroke-dasharray':'7 5',opacity:0.9});
     if(!mini) el('text',{x:xEnd+2,y:yEnd-8,'text-anchor':'end','font-size':12.5,fill:col,'font-weight':700},'P = '+b.P); });
   // constant-T line first, under the dome
   if(md.iso){ const yI=Y(md.iso.T);
@@ -635,10 +636,7 @@ function makeDomeMap(md,mini){
     if(!mini&&md.iso.lab) el('text',{x:W-mr-4,y:yI-8,'text-anchor':'end','font-size':12.5,fill:C.or,'font-weight':700},md.iso.lab); }
   el('path',{d:'M'+SATV.map(r=>X(r[1])+','+Y(r[0])).join(' L'),fill:'none',stroke:C.nv,'stroke-width':mini?5:3});
   el('path',{d:'M'+SATV.map(r=>X(r[2])+','+Y(r[0])).join(' L'),fill:'none',stroke:C.or,'stroke-width':mini?5:3});
-  const cr=SATV[SATV.length-1];
-  el('circle',{cx:X(cr[1]),cy:Y(cr[0]),r:mini?8:6,fill:C.gr,stroke:'#fff','stroke-width':1.5});
-  if(!mini){ el('text',{x:X(cr[1]),y:Y(cr[0])-12,'text-anchor':'middle','font-size':12,fill:C.gr,'font-weight':800},'critical point '+F.crit);
-    const fx=f=>ml+f*(W-ml-mr), fy=f=>mt+f*(H-mt-mb);
+  if(!mini){ const fx=f=>ml+f*(W-ml-mr), fy=f=>mt+f*(H-mt-mb);
     el('text',{x:fx(0.02),y:fy(0.68),'font-size':12.5,fill:C.nv,'font-weight':700},'compressed liquid');
     el('text',{x:fx(0.38),y:fy(0.88),'font-size':13,fill:C.mu,'font-style':'italic'},'saturated mixture');
     el('text',{x:fx(0.74),y:fy(0.35),'font-size':12.5,fill:'#C0392B','font-weight':700},'superheated vapour'); }
