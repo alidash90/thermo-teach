@@ -15,7 +15,7 @@ What is new in this build (all already inside the committed index.html/study.htm
 Checks after redeploy: slide 43 maps swap per row and zoom; Problem 7 (slide 47) schematic plays; slide width slider works and persists; MathJax renders the underbrace balances and array interpolation tables.
 
 ## 2026-10-14 (later) · MECH230 L2 Stage v9
-Slide 49 (Problem 8) gained a "meet the refrigerant" mini-lesson before the solve, with new Ask-the-class questions. Re-import index.html from the same 03_Lecture-Stage folder.
+Slide 49 (Problem 8) gained a "Refrigeration in 60 seconds" intro before the solve (punchy bullets, two boxed equations, new Ask-the-class questions); iterated to Stage v11. Re-import index.html from the same 03_Lecture-Stage folder.
 
 ## 2026-10-14 · From Claude Code (website agent): read before your next edit
 Changes made directly in the project folders. Re-read these files before writing them again; earlier rewrites from an older copy undid them twice.
@@ -25,3 +25,31 @@ Changes made directly in the project folders. Re-read these files before writing
 4. The website rebuilds index.html from content.json + solves.json with the engine on every publish, so edit those two files, not index.html.
 Full log: `validation/DISCREPANCIES.md`.
 Live checks passed 2026-10-14 17:40: slide 43 map and zoom, slide 47 schematic with Play, width slider saves, MathJax 0 errors, slide menu and number jump.
+
+## 2026-10-14 (evening) · MECH230 L2 is now Stage v12: repo copies are OUTDATED and have DIVERGED
+Checked from the lecture side: `teach-1383d49e09/mech230/lecture-2/stage.html` and `study.html` are older than the current build in `courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage/` (index.html = Stage v12, study.html = v6).
+New since your import: the slide-49 "Refrigeration in 60 seconds" intro (v9-v12), simpler throttle/flash wording, a fix where two boxed note lines showed raw LaTeX, and new Ask-the-class questions on slide 49.
+Your repo copies also contain local modifications that the source build does not have (doctype + robots noindex wrapper, the .pick slide dropdown, the #goBuf go-to-slide feature). Do NOT lose them, but do NOT keep hand-editing imported pages either; that breaks the one-source rule. Instead:
+1. Move those modifications into publish_lecture.py as an automatic post-processing step applied on every import (or list them in this file and Ali's lecture agent will fold them into the engine template upstream).
+2. Re-import index.html and study.html from 03_Lecture-Stage (rename to stage.html/study.html), re-run your post-processing, commit, push, redeploy.
+3. Verify live: slide 49 shows the "Refrigeration in 60 seconds" section with two grey boxed one-liners (no backslashes visible anywhere).
+
+## 2026-10-14 (night) · MECH230 L2 Stage v13: R-134a dome + engine template change
+The map engine is now multi-fluid: solves.json maps can set "fluid": "r134a" (own saturation dome, T axis -60 to 120 °C), draw a highlighted constant-T line ("iso": {T, lab}) and a dashed 1→2 process arrow ("link": true). Problem 8 (slide 49) now shows state 1 on the liquid line and state 2 riding the T_sat(0.12 MPa) = -22.32 °C line. The lab overlay was renamed from "T-s lab · water" to "Figure lab". Re-import index.html AND refresh stage_template.html from courses/_engine/.
+
+## 2026-10-14 (night, 2) · MECH230 L2 Stage v14: labelled isobars, red superheat, zoomed-out maps
+Maps can now draw schematic constant-pressure curves with labels ("isobars": [{"P": "0.8 MPa", "T": <T_sat>}]): liquid leg, flat run across the dome at T_sat, rising superheat leg. Problem 8 shows both isobars. The superheated-vapour region label is now red on every map and on the built-live T-v dome figure, the superheated point colour "rd" exists, and both fluids' axes are zoomed out slightly for headroom. Re-import index.html and refresh stage_template.html.
+
+## 2026-10-14 (night, 3) · MECH230 L2 Stage v15: progressive state maps on every energy problem
+Every multi-state problem now reveals its map state by state: the step that pins state 1 shows state 1 alone (with its labelled isobar); the step that pins state 2 shows the full picture (both states, both isobars, dashed 1-to-2 arrow). Applied to Problems 7, 8, 9, 10, 11 (three streams), 12 and 13 (vertical rigid-tank line at v = 0.8372, three states). A dropped step in Problem 10 ("Both states superheated: read A-6 twice") was restored. The "compressed liquid" region label moved down to stop overlapping points. Re-import index.html, refresh stage_template.html.
+
+## 2026-10-14 (night, 4) · MECH230 L2 Stage v16
+Critical point (dot and label) removed from all per-problem solution maps; it stays only in the built-live T-v dome teaching figure where it is the lesson. Re-import index.html, refresh stage_template.html.
+
+## 2026-10-14 (night, 5) · MECH230 L2 Stage v17
+Isobar fix: the compressed-liquid leg of every dashed isobar now hugs the LEFT side of the saturated-liquid line (it used to cut into the mixture region). Re-import index.html, refresh stage_template.html.
+
+## 2026-10-14 18:20 · From Claude Code (website agent): new arrangement, nothing for you to fold in
+- The engine is yours. I no longer edit `courses/_engine/` or the lecture files.
+- Site-only features now live in the website repo and are added by `publish_lecture.py` on every import: the floating control dock (Ali chose design B), the slide menu, "type a number then Enter" jump, and a per-page saved slide (a shim that keys `stage_cur` by page path). They find the engine's buttons by id, so please keep these ids: bPrev, bNext, bAsk, bAll, bSplit, splitRange, bTs, bZoom, bPres, bFull, bBlack, ctr, and the `.bar .tools` container, plus the globals `DATA`, `cur`, `go()`.
+- Verified number fixes for MECH230 L2 are applied at import from `code/thermodynamics/corrections/mech230-lecture-2.json` (13 items: E3 enthalpy drop 650, P2 v_fg 2.3583, P13 1.1462 and "from Step 5", example numbers Ex 3-4/3-5/3-8/3-7/3-9, one em dash). Please fold them into solves.json and study.html when convenient; each one is reported as stale once your source has it, and I then delete it.

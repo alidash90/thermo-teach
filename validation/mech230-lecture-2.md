@@ -1,7 +1,7 @@
-# Number trace: courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage
+# Number trace: courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage (with corrections/)
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 413; traced to the corpus: 336; untraced: 77.
+- Numbers checked (3+ significant digits): 419; traced to the corpus: 342; untraced: 77.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
 ## Table lookups (check first): 5
@@ -39,9 +39,9 @@
 | P9 step 5 | eq | 2336.4 | `w_{\rm out}=h_1-h_2=2903.3-2336.4` |
 | P9 step 6 | num | 566.9 | `\dot W_{\rm actual}=(0.80)(10)(566.9)=4535\ \text{kW}` |
 | P9 step 6 | num | 4535 | `\dot W_{\rm actual}=(0.80)(10)(566.9)=4535\ \text{kW}` |
-| P10 step 3 | res | 2.082 | `\dot m=2.082\ \text{kg/s}` |
-| P10 step 4 | eq | 2.082 | `rm out}=\frac{\dot Q_{\rm out}}{\dot m}=\frac{25}{2.082}` |
-| P10 step 6 | eq | 2.082 | `\dot{\mathcal V}_2=\dot m\,v_2=(2.082)(1.31623)` |
+| P10 step 4 | res | 2.082 | `\dot m=2.082\ \text{kg/s}` |
+| P10 step 5 | eq | 2.082 | `rm out}=\frac{\dot Q_{\rm out}}{\dot m}=\frac{25}{2.082}` |
+| P10 step 7 | eq | 2.082 | `\dot{\mathcal V}_2=\dot m\,v_2=(2.082)(1.31623)` |
 | P11 step 3 | num | 83.91 | `h_1=83.91,\quad h_2=2769.1,\quad h_3=25` |
 | P11 step 4 | num | 209.8 | `209.8+2769.1\,\dot m_2=627.95+251.1` |
 | P11 step 4 | num | 627.95 | `209.8+2769.1\,\dot m_2=627.95+251.18\,\dot m_2+20;\qquad 25` |

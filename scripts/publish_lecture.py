@@ -24,7 +24,7 @@ Source:  <project_root>/courses/<COURSE>/lectures/Lecture-N/our-work/03_Lecture-
 Target:  <unlisted>/<course>/lecture-N/{stage.html, study.html, img/, pdf/, lecture.json}
 The source folders are never written to.
 """
-import argparse, datetime, json, os, re, shutil, subprocess, sys, tempfile, zipfile
+import argparse, datetime, hashlib, json, os, re, shutil, subprocess, sys, tempfile, zipfile
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, 'scripts'))
@@ -32,6 +32,7 @@ import build_site  # noqa: E402
 
 NOINDEX = '<meta name="robots" content="noindex,nofollow">'
 MATHJAX = 'cdnjs.cloudflare.com/ajax/libs/mathjax/'
+SKIN_BASE = '../../../assets/'  # from <unlisted>/<course>/lecture-N/
 
 
 def die(msg):
@@ -43,11 +44,47 @@ def run(cmd, **kw):
     return subprocess.run(cmd, check=True, **kw)
 
 
-def stage_html(src, engine, code, n, title, force):
+class Corrections:
+    """Verified find/replace fixes from corrections/<course>-lecture-N.json, applied to every string in
+    content.json/solves.json and to study.html at publish time. Counts hits so stale entries get reported."""
+    def __init__(self, path):
+        self.fixes = []
+        if os.path.exists(path):
+            with open(path, encoding='utf-8') as f:
+                self.fixes = json.load(f).get('fixes', [])
+        self.hits = [0] * len(self.fixes)
+
+    def text(self, t):
+        for i, fx in enumerate(self.fixes):
+            k = t.count(fx['find'])
+            if k:
+                self.hits[i] += k
+                t = t.replace(fx['find'], fx['replace'])
+        return t
+
+    def data(self, obj):
+        if isinstance(obj, str):
+            return self.text(obj)
+        if isinstance(obj, list):
+            return [self.data(x) for x in obj]
+        if isinstance(obj, dict):
+            return {k: self.data(v) for k, v in obj.items()}
+        return obj
+
+    def report(self):
+        applied = sum(1 for h in self.hits if h)
+        if self.fixes:
+            print(f'  corrections: {applied} of {len(self.fixes)} applied')
+        return [fx['find'] for fx, h in zip(self.fixes, self.hits) if not h]
+
+
+def stage_html(src, engine, code, n, title, force, fixes=None):
     """Return the Stage HTML: the folder's index.html when current, else a fresh engine build."""
     idx = os.path.join(src, 'index.html')
     deps = [os.path.join(src, f) for f in ('content.json', 'solves.json')] + [os.path.join(engine, 'stage_template.html')]
     newest = max(os.path.getmtime(p) for p in deps if os.path.exists(p))
+    if fixes and fixes.fixes:
+        force = True
     if not force and os.path.exists(idx) and os.path.getmtime(idx) >= newest:
         print('  stage: using built index.html')
         with open(idx, encoding='utf-8') as f:
@@ -57,7 +94,12 @@ def stage_html(src, engine, code, n, title, force):
     with tempfile.TemporaryDirectory() as tmp:
         for f in ('content.json', 'solves.json'):
             if os.path.exists(os.path.join(src, f)):
-                shutil.copy2(os.path.join(src, f), tmp)
+                with open(os.path.join(src, f), encoding='utf-8') as fh:
+                    d = json.load(fh)
+                if fixes:
+                    d = fixes.data(d)
+                with open(os.path.join(tmp, f), 'w', encoding='utf-8') as fh:
+                    json.dump(d, fh, ensure_ascii=False)
         run([sys.executable, os.path.join(engine, 'build_stage.py'), tmp, code,
              f'Lecture {n} · {title}', f'{code} Lecture {n} Stage'])
         with open(os.path.join(tmp, 'index.html'), encoding='utf-8') as f:
@@ -80,16 +122,31 @@ def image_source(src, lecdir):
     die('no slide images found (img/, *.zip, au-slide-images/)')
 
 
-def for_web(page):
-    """Make a page safe to serve as a file: full document, UTF-8, noindex.
+def skin_tags():
+    """Head tags that apply the website skin (assets/stage-skin.*) to a Stage page.
+    The shim keys the engine's saved slide per page, so lectures on one domain do not share it."""
+    h = hashlib.sha1()
+    for f in ('stage-skin.css', 'stage-skin.js'):
+        with open(os.path.join(REPO, 'assets', f), 'rb') as fh:
+            h.update(fh.read())
+    v = h.hexdigest()[:8]
+    shim = ("<script>(function(){var P='stage_cur',K=P+':'+location.pathname,S=Storage.prototype,g=S.getItem,s=S.setItem;"
+            "S.getItem=function(k){return g.call(this,k===P?K:k)};S.setItem=function(k,x){return s.call(this,k===P?K:k,x)}})();</script>")
+    return (f'{shim}<link rel="stylesheet" href="{SKIN_BASE}stage-skin.css?v={v}">'
+            f'<script src="{SKIN_BASE}stage-skin.js?v={v}" defer></script>')
+
+
+def for_web(page, skin=False):
+    """Make a page safe to serve as a file: full document, UTF-8, noindex, and (Stage only) the website skin.
     The Stage engine emits a fragment (claude.ai artifacts add the skeleton); add it here the same way."""
+    extra = NOINDEX + (skin_tags() if skin else '')
     if not page.lstrip().lower().startswith('<!doctype'):
         return ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
                 '<meta name="viewport" content="width=device-width,initial-scale=1">'
-                f'{NOINDEX}\n{page}\n</html>\n')
+                f'{extra}\n{page}\n</html>\n')
     if NOINDEX in page:
         return page
-    return re.sub(r'(<head[^>]*>)', r'\1' + NOINDEX, page, count=1, flags=re.I)
+    return re.sub(r'(<head[^>]*>)', lambda m: m.group(1) + extra, page, count=1, flags=re.I)
 
 
 def main():
@@ -142,24 +199,33 @@ def main():
                 shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
     os.makedirs(os.path.join(dest, 'img'), exist_ok=True)
 
-    pages = {'stage.html': stage_html(src, engine, c['code'], n, title, a.rebuild)}
+    fixes = Corrections(os.path.join(REPO, 'corrections', f'{key}-lecture-{n}.json'))
+    pages = {'stage.html': stage_html(src, engine, c['code'], n, title, a.rebuild, fixes)}
     if os.path.exists(os.path.join(src, 'study.html')):
         with open(os.path.join(src, 'study.html'), encoding='utf-8') as f:
-            pages['study.html'] = f.read()
+            pages['study.html'] = fixes.text(f.read())
     else:
         print('  study: no study.html in the build folder; course page will show "not built"')
 
-    warnings = []
+    warnings = [f'correction no longer matches the source (fixed upstream? delete it): {s[:60]}' for s in fixes.report()]
+    eff = tempfile.mkdtemp()  # the corrected content, for the dash check and the number trace
+    for f in ('content.json', 'solves.json'):
+        if os.path.exists(os.path.join(src, f)):
+            with open(os.path.join(src, f), encoding='utf-8') as fh:
+                d = fixes.data(json.load(fh))
+            with open(os.path.join(eff, f), 'w', encoding='utf-8') as fh:
+                json.dump(d, fh, ensure_ascii=False)
     for f in ('content.json', 'solves.json', 'study.html'):
-        p = os.path.join(src, f)
-        dashes = open(p, encoding='utf-8').read().count(chr(0x2014)) if os.path.exists(p) else 0
+        p = os.path.join(eff, f)
+        body = open(p, encoding='utf-8').read() if os.path.exists(p) else pages.get(f, '')
+        dashes = body.count(chr(0x2014))
         if dashes:
             warnings.append(f'{f}: {dashes} em dash(es); fix in the source folder, then republish')
     for name, html in pages.items():
         if MATHJAX not in html:
             warnings.append(f'{name}: MathJax from cdnjs not found')
         with open(os.path.join(dest, name), 'w', encoding='utf-8') as f:
-            f.write(for_web(html))
+            f.write(for_web(html, skin=(name == 'stage.html')))
 
     wanted = sorted({os.path.basename(s['img']) for s in content if s.get('img')}
                     | {mm for h in pages.values() for mm in re.findall(r'img/(p-\d+\.jpe?g)', h)})
@@ -189,7 +255,9 @@ def main():
         print(f'  pdf: {fname}')
 
     vreport = os.path.join(REPO, 'validation', f'{key}-lecture-{n}.md')
-    subprocess.run([sys.executable, os.path.join(REPO, 'scripts', 'validate_numbers.py'), src, vreport], check=True)
+    subprocess.run([sys.executable, os.path.join(REPO, 'scripts', 'validate_numbers.py'), eff, vreport,
+                    os.path.relpath(src, root) + ' (with corrections/)'], check=True)
+    shutil.rmtree(eff, ignore_errors=True)
 
     meta = {'n': n, 'title': title, 'slides': len(content), 'solves': len(solves),
             'study': 'study.html' in pages, 'pdfs': pdfs,

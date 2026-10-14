@@ -1,4 +1,4 @@
-# Number trace: courses/MECH330/lectures/Lecture-2/our-work/03_Lecture-Stage
+# Number trace: courses/MECH330/lectures/Lecture-2/our-work/03_Lecture-Stage (with corrections/)
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
 - Numbers checked (3+ significant digits): 414; traced to the corpus: 339; untraced: 75.

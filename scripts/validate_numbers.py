@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Trace every number in a lecture's content.json + solves.json to the Çengel knowledge base.
 
-Usage: python3 scripts/validate_numbers.py <03_Lecture-Stage folder> [report.md]
+Usage: python3 scripts/validate_numbers.py <03_Lecture-Stage folder> [report.md] [label]
 
 Corpus (read-only, from the project root in site.json):
   courses/MECH330/resources/cengel/digest/*.md, text/*.txt      Çengel 9e digest + appendix CSVs
@@ -85,7 +85,7 @@ def main():
                 misses.append((prio, where, fld, tok, ctx))
     misses.sort(key=lambda m: m[0])
     label = {1: 'Table lookups (check first)', 2: 'Solve steps (mostly computed results)', 3: 'Notes and ask answers'}
-    rel = os.path.relpath(folder, root)
+    rel = sys.argv[3] if len(sys.argv) > 3 else os.path.relpath(folder, root)
     lines = [f'# Number trace: {rel}', '',
              f'- Corpus: {nfiles} files from the Çengel 9e digest and the 10e Connect markdown.',
              f'- Numbers checked (3+ significant digits): {total}; traced to the corpus: {traced}; untraced: {len(misses)}.',

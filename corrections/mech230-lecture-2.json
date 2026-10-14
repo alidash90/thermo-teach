@@ -1,0 +1,70 @@
+{
+ "note": "Verified corrections (see validation/DISCREPANCIES.md) applied by publish_lecture.py to solves.json strings and study.html on every import. A correction that stops matching is reported; delete it once the source carries the fix.",
+ "fixes": [
+  {
+   "why": "E3 step 5: enthalpy drop is 650 (587 = 81.6/0.139 includes ke and pe)",
+   "find": "Enthalpy drop 587",
+   "replace": "Enthalpy drop 650"
+  },
+  {
+   "why": "E3 step 5 sizes line",
+   "find": "587\\ \\text{vs}",
+   "replace": "650\\ \\text{vs}"
+  },
+  {
+   "why": "P1 step 3: no em dashes",
+   "find": "a room of steam — wrong column!",
+   "replace": "a room of steam: wrong column!"
+  },
+  {
+   "why": "P2 step 3: v_fg = 2.3593 - 0.001036 = 2.358264, rounds to 2.3583",
+   "find": "(0.2)(2.3582)",
+   "replace": "(0.2)(2.3583)"
+  },
+  {
+   "why": "P2 step 3: label the difference used",
+   "find": "Table A-4, 90 °C: v_f = 0.001036, v_g = 2.3593 m³/kg",
+   "replace": "Table A-4, 90 °C: v_f = 0.001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583"
+  },
+  {
+   "why": "P13: label the difference used",
+   "find": "Table A-5, 101.325 kPa: v_f = 0.001043, v_g = 1.6734 m³/kg",
+   "replace": "Table A-5, 101.325 kPa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724"
+  },
+  {
+   "why": "P13: interpolated v_g - v_f at 151.95 kPa = 1.14620",
+   "find": "{1.1463}",
+   "replace": "{1.1462}"
+  },
+  {
+   "why": "P13: state 1 is Step 5 after the interpolation steps were added",
+   "find": "v₂ = v₁ = 0.8372 from Step 3;",
+   "replace": "v₂ = v₁ = 0.8372 from Step 5;"
+  },
+  {
+   "why": "P2 is Çengel 9e Example 3-4",
+   "find": "Saturated mixture: P and V (Ex 3-2)",
+   "replace": "Saturated mixture: P and V (Ex 3-4)"
+  },
+  {
+   "why": "P3 is Example 3-5",
+   "find": "R-134a: 80 L, 4 kg at 160 kPa (Ex 3-3)",
+   "replace": "R-134a: 80 L, 4 kg at 160 kPa (Ex 3-5)"
+  },
+  {
+   "why": "P4 is Example 3-8",
+   "find": "Compressed liquid: exact vs shortcut (Ex 3-4)",
+   "replace": "Compressed liquid: exact vs shortcut (Ex 3-8)"
+  },
+  {
+   "why": "P5 is Example 3-7",
+   "find": "Superheated vapour: find T (Ex 3-5)",
+   "replace": "Superheated vapour: find T (Ex 3-7)"
+  },
+  {
+   "why": "P6 is Example 3-9",
+   "find": "Fill the table (a) to (e) (Ex 3-6)",
+   "replace": "Fill the table (a) to (e) (Ex 3-9)"
+  }
+ ]
+}

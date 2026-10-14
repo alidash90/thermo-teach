@@ -1,0 +1,25 @@
+/* Website skin for Lecture Stage pages (added by publish_lecture.py; the engine page itself is untouched).
+   Option B: minimal top bar, controls in a floating dock under the slide that fades when the mouse rests. */
+.bar{flex-wrap:nowrap;gap:14px;padding-block:10px;border-bottom:0}
+.bar .brand{overflow:hidden;text-overflow:ellipsis;font-size:.95rem}
+.bar .prog{height:2px}
+.bar .tools{display:none}
+.bar #ctr{font-size:.85rem}
+.skin-dock{position:fixed;left:50%;bottom:18px;transform:translate(-50%,0);display:flex;align-items:center;flex-wrap:nowrap;justify-content:center;gap:2px;white-space:nowrap;max-width:calc(100vw - 24px);background:rgba(14,20,30,.94);color:#F2F1EC;border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:6px 10px;z-index:14;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:opacity .35s ease,transform .35s ease}
+.skin-dock.idle{opacity:0;transform:translate(-50%,14px);pointer-events:none}
+.skin-dock .tb{border:0;color:inherit;background:transparent;width:36px;height:36px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:.8rem}
+.skin-dock .tb:hover{background:rgba(255,255,255,.12)}
+.skin-dock .tb:disabled{opacity:.35;cursor:default}
+.skin-dock .tb.on{background:var(--orange);color:#fff}
+.skin-dock .tb svg{width:19px;height:19px;flex:none}
+.skin-dock .tb.wide{width:auto;padding:0 10px;gap:6px;font-variant-numeric:tabular-nums}
+.skin-dock .pick{background:transparent;color:inherit;border:0;font:inherit;font-size:.88rem;max-width:min(190px,30vw);padding:8px 6px;border-radius:999px;cursor:pointer}
+.skin-dock .pick:hover{background:rgba(255,255,255,.12)}
+.skin-dock .pick option{color:#1A1F27;background:#fff}
+.skin-dock .dsep{width:1px;height:20px;background:rgba(255,255,255,.18);margin:0 6px}
+.skin-dock input[type=range]{width:64px;accent-color:var(--orange);margin:0 4px}
+.skin-go{color:#F28C3B;font-weight:700;font-size:.85rem;padding:0 6px}
+.skin-go[hidden]{display:none}
+@media (max-width:1279px){.skin-dock input[type=range]{display:none}.skin-dock .pick{max-width:150px}}
+@media (max-width:700px){.skin-dock{flex-wrap:wrap;border-radius:18px}}
+@media (prefers-reduced-motion:reduce){.skin-dock{transition:none}}

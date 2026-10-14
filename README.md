@@ -25,6 +25,8 @@ teach-1383d49e09/                  unlisted instructor area, every page noindex
   mech230/index.html               course page: Stage, Study Desk, PDFs per lecture (generated)
   mech230/lecture-N/               stage.html, study.html, img/p-NN.jpg, pdf/, lecture.json
 assets/site.css                    shared style (AU navy #003C7B, orange #EE7421, dark mode)
+assets/stage-skin.css, .js         website skin for Stage pages: floating dock, slide menu, number + Enter jump
+corrections/<course>-lecture-N.json verified number fixes applied on every import (reported when stale)
 site.json                          site title, unlisted folder name, course list, project_root
 scripts/publish_lecture.py         copy one build in, check, index, commit, push
 scripts/build_site.py              regenerate all index pages from the lecture folders present
@@ -37,7 +39,8 @@ validation/                        per-lecture trace reports + DISCREPANCIES.md 
 2. Stage: uses the built `index.html` when it is newer than content.json, solves.json and the engine template; otherwise rebuilds it in a temp folder with `courses/_engine/lecture-stage/build_stage.py`.
 3. Study Desk: copies `study.html` if present; the course page shows "not built" otherwise.
 4. Images: copies every `img/p-NN.jpg` the pages reference, from `img/`, else the `img/` inside a `*.zip` in the folder, else `Lecture-N/au-slide-images/`. Stops if one is missing.
-5. Wraps the Stage fragment in a full UTF-8 document (claude.ai artifacts do this for the engine output) and adds `noindex` to every lecture page.
+5. Wraps the Stage fragment in a full UTF-8 document (claude.ai artifacts do this for the engine output), adds `noindex` to every lecture page, and adds the website skin to the Stage (dock, slide menu, number jump, saved slide per lecture).
+   Corrections from `corrections/<course>-lecture-N.json` are applied to content.json, solves.json and study.html before building; a correction that no longer matches is reported so it can be deleted.
 6. Warns on em dashes and on missing MathJax; writes `validation/<course>-lecture-N.md`.
 7. Writes `lecture.json`, regenerates every index, commits and pushes.
 
