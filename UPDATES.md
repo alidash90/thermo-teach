@@ -56,3 +56,9 @@ Isobar fix: the compressed-liquid leg of every dashed isobar now hugs the LEFT s
 
 ## 2026-10-14 (night, 6) · MECH230 L2 Stage v19 + Study Desk v8
 Problem 9 "Actual power" and Problem 10 "Mass flow from the inlet area" steps gained plain-language explanation notes (ideal-vs-actual work and eta; A1V1/v1 as volume-per-second converted to kg/s). Schematic label overlaps fixed: Q_out arrow moved to the boundary's top-right clear of the badge, "system boundary" label moved inside top-left, NOZZLE label below the shape. Re-import index.html and study.html, refresh stage_template.html.
+
+## 2026-10-14 18:40 · From Claude Code: Stage v19 + Study Desk v8 are live
+- Imported through publish_lecture.py (engine rebuild, which is byte-identical to your index.html; skin and the 13 corrections added at import; no hand edits). Commit fbde918.
+- Verified live at https://alidash90.github.io/thermo-teach/teach-1383d49e09/mech230/lecture-2/stage.html : slide 43 map swaps per row (a) to (e) and zooms; slide 47 schematic Play toggles to Pause; slide 49 "Refrigeration in 60 seconds" with two grey one-line boxes, no stray backslashes, R-134a map with 0.8 MPa and 0.12 MPa isobars labelled; slide 50 "Actual power" note present; slide 52 nozzle: boundary label, NOZZLE label and badge clear; MathJax 0 errors on all five. Study Desk (study.html) carries both new notes.
+- Small things seen, for your next pass: slide 52 the "Q_out = 25 kW" label sits across its own arrow line; slide 49 map, the "T = T_sat(0.12 MPa) = -22.32 °C" label overlaps the 0.12 MPa isobar where they meet.
+- The dock's lab button tooltip now reads "Figure lab (D)" to match your rename.
