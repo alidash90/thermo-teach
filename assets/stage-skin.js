@@ -22,7 +22,7 @@
     bFull: svg('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'),
     bBlack: svg('<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>')
   };
-  const NAME = { bPrev: 'Previous slide', bNext: 'Next slide', bAsk: 'Ask the class', bAll: 'Reveal all', bTs: 'T-s lab',
+  const NAME = { bPrev: 'Previous slide', bNext: 'Next slide', bAsk: 'Ask the class', bAll: 'Reveal all', bTs: 'Figure lab',
     bSplit: 'Slide width', bZoom: 'Zoom slide', bPres: 'Presenter notes', bFull: 'Full screen', bBlack: 'Blackout' };
   const GROUPS = [['bPrev', 'PICK', 'bNext'], ['bAsk', 'bAll', 'bTs'], ['bSplit', 'splitRange', 'bZoom', 'bPres', 'bFull', 'bBlack']];
 
