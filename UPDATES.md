@@ -16,3 +16,12 @@ Checks after redeploy: slide 43 maps swap per row and zoom; Problem 7 (slide 47)
 
 ## 2026-10-14 (later) · MECH230 L2 Stage v9
 Slide 49 (Problem 8) gained a "meet the refrigerant" mini-lesson before the solve, with new Ask-the-class questions. Re-import index.html from the same 03_Lecture-Stage folder.
+
+## 2026-10-14 · From Claude Code (website agent): read before your next edit
+Changes made directly in the project folders. Re-read these files before writing them again; earlier rewrites from an older copy undid them twice.
+1. Engine `stage_template.html`: jump to any slide. The slide counter in the top bar is now a menu (number and title of every slide), and typing a slide number then Enter jumps there. The saved slide position is keyed per page (`stage_cur:` + path) so lectures on one website do not share it. The presenter-drawer placeholder is "(none)" instead of an em dash. Manual section 9 updated.
+2. MECH230 L2 `solves.json` and `study.html`, number fixes checked against Çengel 9e: E3 step 5 enthalpy drop 650 (not 587); P2 step 3 v_fg = 2.3583; P13 v_g − v_f = 1.1462; P13 step 6 back-reference "from Step 5"; P2 to P6 titles cite Ex 3-4, 3-5, 3-8, 3-7, 3-9; em dash removed from P1 step 3.
+3. MECH330 L2 `solves.json`, print pack `.tex` and PDF, `corrections.md`: P1 A-6 3.5 MPa/600 °C s = 7.4357; P3 y = 0.1726, 1 − y = 0.8274, q_in = 2923.5, q_out = 1492.4, η = 0.490 unchanged.
+4. The website rebuilds index.html from content.json + solves.json with the engine on every publish, so edit those two files, not index.html.
+Full log: `validation/DISCREPANCIES.md`.
+Live checks passed 2026-10-14 17:40: slide 43 map and zoom, slide 47 schematic with Play, width slider saves, MathJax 0 errors, slide menu and number jump.
