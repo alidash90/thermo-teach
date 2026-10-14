@@ -13,3 +13,6 @@ What is new in this build (all already inside the committed index.html/study.htm
 6. Engine hardening: mth() HTML-escapes &, <, > and guards empty strings; table look-ups render as prominent orange "Using the table" bands.
 
 Checks after redeploy: slide 43 maps swap per row and zoom; Problem 7 (slide 47) schematic plays; slide width slider works and persists; MathJax renders the underbrace balances and array interpolation tables.
+
+## 2026-10-14 (later) · MECH230 L2 Stage v9
+Slide 49 (Problem 8) gained a "meet the refrigerant" mini-lesson before the solve, with new Ask-the-class questions. Re-import index.html from the same 03_Lecture-Stage folder.
