@@ -1,0 +1,23 @@
+{
+  "site_title": "Thermodynamics at AU Kuwait",
+  "instructor": "Dr Ali Dashti",
+  "department": "Mechanical Engineering, Australian University Kuwait",
+  "unlisted": "teach-1383d49e09",
+  "project_root": "../..",
+  "courses": {
+    "mech230": {
+      "code": "MECH230",
+      "name": "Thermodynamics I",
+      "folder": "MECH230",
+      "blurb": "Energy, properties of pure substances, the first law for closed and open systems, the second law and entropy.",
+      "book": "Çengel and Boles, Thermodynamics: An Engineering Approach"
+    },
+    "mech330": {
+      "code": "MECH330",
+      "name": "Thermodynamics II",
+      "folder": "MECH330",
+      "blurb": "Vapour and gas power cycles, refrigeration, gas mixtures, fuels and combustion.",
+      "book": "Çengel and Boles, Thermodynamics: An Engineering Approach"
+    }
+  }
+}
