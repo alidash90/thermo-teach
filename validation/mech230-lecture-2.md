@@ -69,8 +69,8 @@
 | P13 step 6 | num | 1.1462 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(` |
 | P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
 | P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
-| P13 step 6 | note | 0.8372 | `v₂ = v₁ = 0.8372 from Step 3; v_f, v_g interpo` |
-| P13 step 6 | note | 151.95 | `v₁ = 0.8372 from Step 3; v_f, v_g interpolated at 151.95 kPa.` |
+| P13 step 6 | note | 0.8372 | `v₂ = v₁ = 0.8372 from Step 5; v_f, v_g interpo` |
+| P13 step 6 | note | 151.95 | `v₁ = 0.8372 from Step 5; v_f, v_g interpolated at 151.95 kPa.` |
 | P13 step 7 | eq | 0.8372 | `3/\mathrm{kg}) \\ \hline 200 & 0.88578 \\ P_3=? & 0.8372 \\ 225 & 0.79329 \end{array}` |
 | P13 step 8 | num | 0.04858 | `\frac{P_3-200}{225-200}=\frac{P_3-200}{25}=\frac{-0.04858}{-0.09249}=0.525` |
 | P13 step 8 | num | 0.09249 | `200}{225-200}=\frac{P_3-200}{25}=\frac{-0.04858}{-0.09249}=0.525` |
