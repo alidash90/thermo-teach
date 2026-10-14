@@ -25,5 +25,10 @@ Fixes are made in the source folder (`courses/<COURSE>/lectures/Lecture-N/our-wo
 | P3 step 7, q_out | 0.6960(2143.9) = 1492.3 | show 0.6961, or print 1492.2 | the printed factor does not multiply out; η = 0.490 unaffected | inconsistent | fixed 2026-10-14 |
 | P3 | h₄ = 655.94, η = 0.490 vs book 643.92, 0.492 | as on page | Ex 10-6 pump II quirk, already in `assistant/cengel-study/corrections.md` | known book quirk | logged |
 
+## Note on 2026-10-14 16:06
+- Another session rewrote MECH230 Lecture 2 (`solves.json`, `study.html`, `index.html`) and the engine template from a copy older than these fixes: interpolation tables added to P5, P6, P12, P13; T-v minimap and a 20 to 70 % slide-width slider in the engine. Its work was kept; the MECH230 fixes above and the engine fixes were re-applied on top of it.
+- Also fixed after that rewrite: P13 step 6 note said "v₁ from Step 3"; after the renumbering state 1 is Step 5.
+- New interpolation steps rechecked: P5 0.325, P6 0.904 and 395.2 °C, P12 0.884, P13 0.078 and 111.7 °C, 0.525: all correct.
+
 ## Engine
 - 2026-10-14: `stage_template.html` presenter drawer placeholder changed from an em dash to "(none)"; saved slide position now keyed per page (`stage_cur:` + path) so lectures on one domain do not share it. Fixed.
