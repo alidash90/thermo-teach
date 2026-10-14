@@ -26,4 +26,4 @@ Fixes are made in the source folder (`courses/<COURSE>/lectures/Lecture-N/our-wo
 | P3 | h₄ = 655.94, η = 0.490 vs book 643.92, 0.492 | as on page | Ex 10-6 pump II quirk, already in `assistant/cengel-study/corrections.md` | known book quirk | logged |
 
 ## Engine
-- `courses/_engine/lecture-stage/stage_template.html` line 220 uses an em dash (U+2014) as the empty-field placeholder in the presenter drawer (`d.teach||...`). Change it in the engine when convenient.
+- 2026-10-14: `stage_template.html` presenter drawer placeholder changed from an em dash to "(none)"; saved slide position now keyed per page (`stage_cur:` + path) so lectures on one domain do not share it. Fixed.
