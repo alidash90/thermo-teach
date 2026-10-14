@@ -1,12 +1,12 @@
 # Number trace: courses/MECH330/lectures/Lecture-2/our-work/03_Lecture-Stage
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 414; traced to the corpus: 340; untraced: 74.
+- Numbers checked (3+ significant digits): 414; traced to the corpus: 339; untraced: 75.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
 ## Table lookups (check first): 0
 
-## Solve steps (mostly computed results): 57
+## Solve steps (mostly computed results): 58
 
 | Where | Field | Value | Context |
 |---|---|---|---|
@@ -48,19 +48,20 @@
 | P3 step 4 | num | 375.5 | `h_9=3583.1,\ s_9=6.6796;\quad h_{10}=3155.0\ (375.5^\circ\text{C});\quad h_{11}=3` |
 | P3 step 5 | num | 655.94 | `y=\frac{1087.4-655.94}{(3155.0-1087.4)+(1087.4-655.` |
 | P3 step 5 | num | 655.94 | `y=\frac{1087.4-655.94}{(3155.0-1087.4)+(1087.4-655.` |
-| P3 step 5 | num | 0.1727 | `c{1087.4-655.94}{(3155.0-1087.4)+(1087.4-655.94)}=0.1727\quad\text{(book 0.1766)}` |
-| P3 step 6 | num | 0.8273 | `z=\frac{0.8273(640.09-192.30)}{3014.8-192.30` |
-| P3 step 6 | num | 0.1313 | `z=\frac{0.8273(640.09-192.30)}{3014.8-192.30}=0.1313;\qquad h_8=0.8273(1087.4)+0.1` |
-| P3 step 6 | num | 0.8273 | `z=\frac{0.8273(640.09-192.30)}{3014.8-192.30` |
-| P3 step 6 | num | 0.1727 | `}{3014.8-192.30}=0.1313;\qquad h_8=0.8273(1087.4)+0.1727(1101.2)=1089.8` |
-| P3 step 7 | num | 2493.3 | `q_{\rm in}=2493.3+0.8273(519.9)=2923.4,\qquad q` |
-| P3 step 7 | num | 0.8273 | `q_{\rm in}=2493.3+0.8273(519.9)=2923.4,\qquad q_{\rm o` |
-| P3 step 7 | num | 519.9 | `q_{\rm in}=2493.3+0.8273(519.9)=2923.4,\qquad q_{\rm out}=0.` |
-| P3 step 7 | num | 2923.4 | `q_{\rm in}=2493.3+0.8273(519.9)=2923.4,\qquad q_{\rm out}=0.6960(214` |
-| P3 step 7 | num | 2143.9 | `.3+0.8273(519.9)=2923.4,\qquad q_{\rm out}=0.6960(2143.9)=1492.3\ \text{kJ/kg}` |
-| P3 step 7 | num | 1492.3 | `3(519.9)=2923.4,\qquad q_{\rm out}=0.6960(2143.9)=1492.3\ \text{kJ/kg}` |
-| P3 step 7 | res | 1492.3 | `\eta_{\rm th}=1-\frac{1492.3}{2923.4}=0.490\quad(\text{boo` |
-| P3 step 7 | res | 2923.4 | `\eta_{\rm th}=1-\frac{1492.3}{2923.4}=0.490\quad(\text{book } 0.49` |
+| P3 step 5 | num | 0.1726 | `c{1087.4-655.94}{(3155.0-1087.4)+(1087.4-655.94)}=0.1726\quad\text{(book 0.1766)}` |
+| P3 step 6 | num | 0.8274 | `z=\frac{0.8274(640.09-192.30)}{3014.8-192.30` |
+| P3 step 6 | num | 0.1313 | `z=\frac{0.8274(640.09-192.30)}{3014.8-192.30}=0.1313;\qquad h_8=0.8274(1087.4)+0.1` |
+| P3 step 6 | num | 0.8274 | `z=\frac{0.8274(640.09-192.30)}{3014.8-192.30` |
+| P3 step 6 | num | 0.1726 | `}{3014.8-192.30}=0.1313;\qquad h_8=0.8274(1087.4)+0.1726(1101.2)=1089.8` |
+| P3 step 7 | num | 2493.3 | `q_{\rm in}=2493.3+0.8274(519.9)=2923.5,\qquad q` |
+| P3 step 7 | num | 0.8274 | `q_{\rm in}=2493.3+0.8274(519.9)=2923.5,\qquad q_{\rm o` |
+| P3 step 7 | num | 519.9 | `q_{\rm in}=2493.3+0.8274(519.9)=2923.5,\qquad q_{\rm out}=0.` |
+| P3 step 7 | num | 2923.5 | `q_{\rm in}=2493.3+0.8274(519.9)=2923.5,\qquad q_{\rm out}=0.6961(214` |
+| P3 step 7 | num | 0.6961 | `n}=2493.3+0.8274(519.9)=2923.5,\qquad q_{\rm out}=0.6961(2143.9)=1492.4\ \text{kJ/kg}` |
+| P3 step 7 | num | 2143.9 | `.3+0.8274(519.9)=2923.5,\qquad q_{\rm out}=0.6961(2143.9)=1492.4\ \text{kJ/kg}` |
+| P3 step 7 | num | 1492.4 | `4(519.9)=2923.5,\qquad q_{\rm out}=0.6961(2143.9)=1492.4\ \text{kJ/kg}` |
+| P3 step 7 | res | 1492.4 | `\eta_{\rm th}=1-\frac{1492.4}{2923.5}=0.490\quad(\text{boo` |
+| P3 step 7 | res | 2923.5 | `\eta_{\rm th}=1-\frac{1492.4}{2923.5}=0.490\quad(\text{book } 0.49` |
 | P4 step 2 | num | 0.9958 | `x_5=0.9958,\ h_5=2739.3;\qquad x_6=0.798` |
 | P4 step 2 | num | 0.7987 | `x_5=0.9958,\ h_5=2739.3;\qquad x_6=0.7987,\ h_6=2073.0\ \text{kJ/kg}` |
 | P4 step 3 | num | 6995 | `640.09,\ h_8=137.75;\qquad w_{\rm pumpI}=0.001005(6995)=7.03\Rightarrow h_9=144.78;\` |
