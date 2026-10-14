@@ -1,14 +1,16 @@
 # Number trace: courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 416; traced to the corpus: 341; untraced: 75.
+- Numbers checked (3+ significant digits): 416; traced to the corpus: 339; untraced: 77.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
-## Table lookups (check first): 3
+## Table lookups (check first): 5
 
 | Where | Field | Value | Context |
 |---|---|---|---|
+| P2 step 3 | tbl | 2.3583 | `001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583` |
 | P11 step 2 | tbl | 83.91 | `Table A-4: h₁ ≈ h_f@20 °C = 83.91; h₃ ≈ h_f@60 °C = 251.18.  Ta` |
+| P13 step 5 | tbl | 1.6724 | `Pa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724` |
 | P13 step 6 | tbl | 151.95 | `A-5 interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.` |
 | P13 step 6 | tbl | 1.1473 | `interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.1473 m³/kg` |
 
@@ -17,9 +19,9 @@
 | Where | Field | Value | Context |
 |---|---|---|---|
 | E3 step 4 | num | 587.1 | `\Delta h=\frac{-81.6}{0.139}-63.0+0.049=-587.1-63.0+0.05` |
-| P2 step 3 | num | 2.3582 | `v=0.001036+(0.2)(2.3582)=0.4727\ \text{m}^3/\text{kg}` |
-| P2 step 3 | num | 0.4727 | `v=0.001036+(0.2)(2.3582)=0.4727\ \text{m}^3/\text{kg},\qquad ` |
-| P2 step 3 | num | 0.4727 | `v=0.001036+(0.2)(2.3582)=0.4727\ \text{m}^3/\text{kg},\qquad ` |
+| P2 step 3 | num | 2.3583 | `v=0.001036+(0.2)(2.3583)=0.4727\ \text{m}^3/\text{kg}` |
+| P2 step 3 | num | 0.4727 | `v=0.001036+(0.2)(2.3583)=0.4727\ \text{m}^3/\text{kg},\qquad ` |
+| P2 step 3 | num | 0.4727 | `v=0.001036+(0.2)(2.3583)=0.4727\ \text{m}^3/\text{kg},\qquad ` |
 | P2 step 4 | num | 4.72 | `V=0.008+4.72=4.73\ \text{m}^3\;\checkmark` |
 | P2 step 4 | note | 99.8 | `Two kg of vapour fill 99.8 % of the tank. That is why x ` |
 | P3 step 2 | num | 0.1236 | `0.0007<0.02<0.1236\;\checkmark` |
@@ -63,10 +65,10 @@
 | P13 step 5 | num | 1.6724 | `v_1=0.001043+(0.5)(1.6724)=0.8372;\qquad m=\frac{0.5}{0` |
 | P13 step 5 | num | 0.8372 | `v_1=0.001043+(0.5)(1.6724)=0.8372;\qquad m=\frac{0.5}{0.8372}=0` |
 | P13 step 5 | num | 0.8372 | `v_1=0.001043+(0.5)(1.6724)=0.8372;\qquad m=\frac{0.5}{0.8372}=0` |
-| P13 step 6 | num | 0.8372 | `x_2=\frac{0.8372-0.001053}{1.1463}=0.729;\qqua` |
-| P13 step 6 | num | 1.1463 | `x_2=\frac{0.8372-0.001053}{1.1463}=0.729;\qquad m_{g2}=(0.729)(` |
-| P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1463}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
-| P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1463}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
+| P13 step 6 | num | 0.8372 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qqua` |
+| P13 step 6 | num | 1.1462 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(` |
+| P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
+| P13 step 6 | num | 0.729 | `x_2=\frac{0.8372-0.001053}{1.1462}=0.729;\qquad m_{g2}=(0.729)(0.597)` |
 | P13 step 6 | note | 0.8372 | `v₂ = v₁ = 0.8372 from Step 3; v_f, v_g interpo` |
 | P13 step 6 | note | 151.95 | `v₁ = 0.8372 from Step 3; v_f, v_g interpolated at 151.95 kPa.` |
 | P13 step 7 | eq | 0.8372 | `3/\mathrm{kg}) \\ \hline 200 & 0.88578 \\ P_3=? & 0.8372 \\ 225 & 0.79329 \end{array}` |
