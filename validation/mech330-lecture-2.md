@@ -1,7 +1,7 @@
 # Number trace: courses/MECH330/lectures/Lecture-2/our-work/03_Lecture-Stage (with corrections/)
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 517; traced to the corpus: 425; untraced: 92.
+- Numbers checked (3+ significant digits): 513; traced to the corpus: 421; untraced: 92.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
 ## Table lookups (check first): 0
