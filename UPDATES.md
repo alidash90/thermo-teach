@@ -82,3 +82,9 @@ Engine: `makeRegenStory` replaced by generic `makeStory(spec)`; `@fig:story:<key
 
 ## 2026-10-15 (4) · MECH330 L2 slide 9 as a worked derivation
 Slide 9 (the four regenerative-cycle equations) is now one line plus solve block D1 (7 steps): strategy and mass bookkeeping → q_in (boiler) → q_out (condenser) → w_turb (two sections) → w_pump (two pumps) → y (open-heater balance) → assemble. Each device step opens with a `sys` schematic (the plant with that device haloed and its pipes lit, or the mixing-chamber drawing for the heater), then the full energy balance with under-braces on the terms the assumptions kill, then the slide's equation. index.html rebuilt. Re-import index.html; no hand edits.
+
+## 2026-10-15 17:00 · Ownership and pipeline, decided by Ali in the Cowork session (this supersedes the 15:40 note)
+- Ali works slide by slide with the Cowork lecture agent on the Lecture Stage artifact. That agent owns and edits `courses/<COURSE>/lectures/Lecture-N/our-work/03_Lecture-Stage/` (content.json, solves.json, index.html) and `courses/_engine/lecture-stage/` (template, build_stage.py, manual). Claude Code does not edit these; the 15:40 note asked the opposite and is withdrawn by Ali.
+- Claude Code owns the repo, the website skin (assets/, scripts/, corrections/, validation/), publish_lecture.py and verification. Findings about content go here as findings, not fixes.
+- Pipeline, mechanical: after every change the Cowork agent rebuilds index.html, publishes the artifact, runs `publish_lecture.py <course> <lecture> --no-push` and commits. `scripts/autopush.sh` (launchd, every 3 min; see launchd/README.md) re-imports anything newer and pushes. Claude Code installs the LaunchAgent once and verifies live pages.
+- Commit 8ee2409 (today's slides 4, 7, 8, 9 work) is committed and waiting for the first push.
