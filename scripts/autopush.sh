@@ -18,8 +18,9 @@ root=os.path.expanduser(site.get('project_root','../..'))
 if not os.path.isabs(root): root=os.path.normpath(os.path.join(repo,root))
 unl=site.get('unlisted','teach-1383d49e09')
 tpl=os.path.join(root,'courses/_engine/lecture-stage/stage_template.html')
-for c in site.get('courses',[]):
-    code=c['code'] if isinstance(c,dict) else c; slug=code.lower()
+cs=site.get('courses',{}); items=cs.items() if isinstance(cs,dict) else [(c.lower() if isinstance(c,str) else c['code'].lower(),c) for c in cs]
+for slug,c in items:
+    code=c.get('folder',c.get('code',slug.upper())) if isinstance(c,dict) else c.upper()
     lec=os.path.join(root,'courses',code,'lectures')
     if not os.path.isdir(lec): continue
     for d in sorted(os.listdir(lec)):
