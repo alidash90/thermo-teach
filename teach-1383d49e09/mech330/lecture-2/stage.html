@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><script>(function(){var P='stage_cur',K=P+':'+location.pathname,S=Storage.prototype,g=S.getItem,s=S.setItem;S.getItem=function(k){return g.call(this,k===P?K:k)};S.setItem=function(k,x){return s.call(this,k===P?K:k,x)}})();</script><link rel="stylesheet" href="../../../assets/stage-skin.css?v=1ae83030"><script src="../../../assets/stage-skin.js?v=1ae83030" defer></script>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><script>(function(){var P='stage_cur',K=P+':'+location.pathname,S=Storage.prototype,g=S.getItem,s=S.setItem;S.getItem=function(k){return g.call(this,k===P?K:k)};S.setItem=function(k,x){return s.call(this,k===P?K:k,x)}})();</script><link rel="stylesheet" href="../../../assets/stage-skin.css?v=e6f5682a"><script src="../../../assets/stage-skin.js?v=e6f5682a" defer></script>
 <title>MECH330 Lecture 2 Stage</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
@@ -305,7 +305,7 @@ function makeSysSketch(sys){
     if(breathe) pulse.push(gg); return gg; };
   const bx=210,by=70,bw=300,bh=180;
   el('rect',{x:bx,y:by,width:bw,height:bh,rx:14,fill:'none',stroke:C.or,'stroke-width':2.5,'stroke-dasharray':'9 7'});
-  el('text',{x:bx+bw-6,y:by-8,'text-anchor':'end','font-size':12.5,fill:C.or,'font-weight':700,'font-style':'italic'},'system boundary');
+  el('text',{x:bx+8,y:by+18,'text-anchor':'start','font-size':12.5,fill:C.or,'font-weight':700,'font-style':'italic'},'system boundary');
   const badge=sys.open?'OPEN SYSTEM · control volume · mass crosses the boundary':'CLOSED SYSTEM · fixed mass · no mass crosses the boundary';
   el('rect',{x:10,y:10,width:badge.length*7.4+22,height:28,rx:14,fill:sys.open?C.gr:C.nv}); el('text',{x:21,y:29,'font-size':13,fill:'#fff','font-weight':800,'letter-spacing':'.03em'},badge);
   const cx=bx+bw/2, cy=by+bh/2, dcol=sys.open?'#7B4FD6':C.nv;
@@ -314,7 +314,7 @@ function makeSysSketch(sys){
   if(dev==='turbine'){ el('path',{d:`M${cx-85},${cy-55} L${cx+85},${cy-25} L${cx+85},${cy+25} L${cx-85},${cy+55} Z`,fill:'none',stroke:dcol,'stroke-width':3}); el('text',{x:cx,y:cy-32,'text-anchor':'middle','font-size':14,fill:dcol,'font-weight':800},'TURBINE');
     rotG=document.createElementNS(ns,'g'); svg.appendChild(rotG); const re=mk(rotG); re('circle',{cx:cx,cy:cy+8,r:20,fill:'none',stroke:dcol,'stroke-width':2.5});
     for(let a=0;a<3;a++){ const th=a*2.094; re('line',{x1:cx,y1:cy+8,x2:cx+18*Math.cos(th),y2:cy+8+18*Math.sin(th),stroke:dcol,'stroke-width':3}); } }
-  else if(dev==='nozzle'){ el('path',{d:`M${cx-90},${cy-50} L${cx+90},${cy-16} L${cx+90},${cy+16} L${cx-90},${cy+50} Z`,fill:'none',stroke:dcol,'stroke-width':3}); el('text',{x:cx-14,y:cy-26,'text-anchor':'middle','font-size':15,fill:dcol,'font-weight':800},'NOZZLE'); }
+  else if(dev==='nozzle'){ el('path',{d:`M${cx-90},${cy-50} L${cx+90},${cy-16} L${cx+90},${cy+16} L${cx-90},${cy+50} Z`,fill:'none',stroke:dcol,'stroke-width':3}); el('text',{x:cx,y:cy+64,'text-anchor':'middle','font-size':15,fill:dcol,'font-weight':800},'NOZZLE'); }
   else if(dev==='throttle'){ el('line',{x1:cx-90,y1:cy,x2:cx+90,y2:cy,stroke:dcol,'stroke-width':8}); el('circle',{cx:cx,cy:cy,r:16,fill:'var(--panel)',stroke:dcol,'stroke-width':3}); el('line',{x1:cx,y1:cy-34,x2:cx,y2:cy-16,stroke:dcol,'stroke-width':3}); el('line',{x1:cx-12,y1:cy-34,x2:cx+12,y2:cy-34,stroke:dcol,'stroke-width':3}); el('text',{x:cx,y:cy+40,'text-anchor':'middle','font-size':14,fill:dcol,'font-weight':800},'VALVE / POROUS PLUG'); }
   else if(dev==='mixing'){ el('rect',{x:cx-80,y:cy-55,width:160,height:110,rx:10,fill:'none',stroke:dcol,'stroke-width':3}); el('text',{x:cx,y:cy+5,'text-anchor':'middle','font-size':14,fill:dcol,'font-weight':800},'MIXING'); }
   else if(dev==='pan'){ el('path',{d:`M${cx-70},${cy-25} L${cx-70},${cy+35} L${cx+70},${cy+35} L${cx+70},${cy-25}`,fill:'none',stroke:dcol,'stroke-width':4}); el('line',{x1:cx+70,y1:cy-18,x2:cx+115,y2:cy-18,stroke:dcol,'stroke-width':4}); el('text',{x:cx,y:cy+12,'text-anchor':'middle','font-size':14,fill:dcol,'font-weight':800},'WATER'); }
@@ -324,7 +324,7 @@ function makeSysSketch(sys){
     if(sys.in2) arr(60,cy+58,bx-4,cy+58,C.or,sys.in2,16); }
   else el('text',{x:cx,y:by+bh+24,'text-anchor':'middle','font-size':13,fill:C.mu,'font-style':'italic'},'no mass in, no mass out: only energy crosses the dashed line');
   if(sys.qIn) arr(cx-40,by+bh+42,cx-40,by+bh+4,'#C0392B',sys.qIn,54,true);
-  if(sys.qOut) arr(cx+40,by-4,cx+40,by-46,'#C0392B',sys.qOut,-6,true);
+  if(sys.qOut) arr(bx+bw-8,by-4,bx+bw-8,by-46,'#C0392B',sys.qOut,-8,true);
   if(sys.wIn) arr(90,by+22,bx-4,by+22,'#7B4FD6',sys.wIn,-10,true);
   if(sys.wOut) arr(bx+bw+4,by+bh-22,640,by+bh-22,'#7B4FD6',sys.wOut,-10,true);
   // ---- animation ----
@@ -641,7 +641,7 @@ function makeDomeMap(md,mini){
     el('text',{x:fx(0.38),y:fy(0.88),'font-size':13,fill:C.mu,'font-style':'italic'},'saturated mixture');
     el('text',{x:fx(0.74),y:fy(0.35),'font-size':12.5,fill:'#C0392B','font-weight':700},'superheated vapour'); }
   const COL={or:C.or,nv:C.nv,gr:C.gr};
-  const pos=p=>({x:(p.x!=null)?(edgeX(p.T,1)+p.x*(edgeX(p.T,2)-edgeX(p.T,1))):(X(p.v)+(p.off||0)),y:Y(p.T)});
+  const pos=p=>({x:Math.min(W-mr-10,Math.max(ml+12,(p.x!=null)?(edgeX(p.T,1)+p.x*(edgeX(p.T,2)-edgeX(p.T,1))):(X(p.v)+(p.off||0)))),y:Y(p.T)});
   if(md.link&&(md.pts||[]).length>1){ const a=pos(md.pts[0]),b=pos(md.pts[1]);
     el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:C.mu,'stroke-width':2.5,'stroke-dasharray':'6 5'});
     const an=Math.atan2(b.y-a.y,b.x-a.x); el('path',{d:`M${b.x-10*Math.cos(an)},${b.y-10*Math.sin(an)} L${b.x-22*Math.cos(an-0.35)},${b.y-22*Math.sin(an-0.35)} L${b.x-22*Math.cos(an+0.35)},${b.y-22*Math.sin(an+0.35)} Z`,fill:C.mu}); }

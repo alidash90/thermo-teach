@@ -31,7 +31,7 @@ site.json                          site title, unlisted folder name, course list
 scripts/publish_lecture.py         copy one build in, check, index, commit, push
 scripts/build_site.py              regenerate all index pages from the lecture folders present
 scripts/validate_numbers.py        trace every number to the Çengel knowledge base
-validation/                        per-lecture trace reports + DISCREPANCIES.md (confirmed findings)
+validation/                        per-lecture trace reports + discrepancies.md (confirmed findings)
 ```
 
 ## 3. What publish_lecture.py does
@@ -47,7 +47,7 @@ validation/                        per-lecture trace reports + DISCREPANCIES.md 
 ## 4. Rules
 - The repo is the publishing place, never the editing place. Fix content in `courses/`, engine changes in `courses/_engine/`, then republish.
 - Privacy (decided 2026-10-14): public repo, public landing and course pages; Stage and Study Desk only under the unlisted folder. Anyone who browses the repo on github.com can still find them; for real protection use a private repo with GitHub Pro.
-- Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/DISCREPANCIES.md`.
+- Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/discrepancies.md`.
 
 ## 5. Ready for later (not built yet)
 - Student view: a second engine output without answers, published to the public course pages (`lecture.json` can carry a `student` flag).

@@ -128,4 +128,59 @@
     }
     if (buf && (e.key === 'Escape' || e.key === 'Backspace')) { e.preventDefault(); e.stopImmediatePropagation(); setBuf(e.key === 'Escape' ? '' : buf.slice(0, -1)); }
   }, true);
+
+  // Book panel: figures and worked examples from the Cengel knowledge base (book.json, written by the publish step).
+  const bookSvg = svg('<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>');
+  fetch('book.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : {})).then(BOOK => {
+    if (!BOOK || !Object.keys(BOOK).length) return;
+    const btn = document.createElement('button');
+    btn.className = 'tb'; btn.id = 'skinBook'; btn.innerHTML = bookSvg;
+    btn.title = 'Book figure or example for this slide (K)'; btn.setAttribute('aria-label', btn.title);
+    const ts = $('bTs');
+    ts && ts.parentNode === dock ? ts.after(btn) : dock.appendChild(btn);
+    const chip = document.createElement('button');
+    chip.className = 'skin-chip'; chip.hidden = true;
+    const eyebrow = $('eyebrow');
+    if (eyebrow) eyebrow.after(chip);
+    const ov = document.createElement('div');
+    ov.className = 'skin-book'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Book');
+    document.body.appendChild(ov);
+    const esc = t => String(t || '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const entry = () => (typeof cur === 'number' && DATA[cur] ? BOOK[String(DATA[cur].n)] : null);
+    function refresh() {
+      const e = entry();
+      btn.disabled = !e;
+      chip.hidden = !e;
+      if (e) chip.textContent = 'Çengel: ' + [...e.figures.map(f => 'Fig. ' + f.id), ...e.examples.map(x => 'Ex. ' + x.id)].join(' · ');
+      if (!e) ov.classList.remove('on');
+      placeDock();
+    }
+    function open() {
+      const e = entry();
+      if (!e) return;
+      const figs = e.figures.map(f => f.image
+        ? '<figure class="bk-fig"><img src="' + esc(f.image) + '" alt="Cengel figure ' + esc(f.id) + '"><figcaption><b>Figure ' + esc(f.id) + '</b> ' + esc(f.caption) + ' <span>Çengel 9e, p. ' + f.page + '</span></figcaption></figure>'
+        : '<div class="bk-fig bk-pending"><b>Figure ' + esc(f.id) + '</b> ' + esc(f.caption) + '<span>Çengel 9e, p. ' + f.page + '. The page image appears here once the book pages are rendered.</span></div>');
+      ov.innerHTML = '<div class="bk-wrap"><div class="bk-bar"><span>Çengel and Boles, Thermodynamics 9e (SI)</span><button class="bk-close" aria-label="Close (Esc)">Close <kbd>Esc</kbd></button></div>' +
+        figs.join('') + e.examples.map(x => x.html).join('') + '</div>';
+      ov.querySelector('.bk-close').onclick = close;
+      ov.classList.add('on');
+      ov.scrollTop = 0;
+    }
+    function close() { ov.classList.remove('on'); }
+    btn.addEventListener('click', () => (ov.classList.contains('on') ? close() : open()));
+    chip.addEventListener('click', open);
+    if (ctr) new MutationObserver(refresh).observe(ctr, { childList: true, characterData: true, subtree: true });
+    refresh();
+    document.addEventListener('keydown', e => {
+      const tag = e.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (ov.classList.contains('on')) {
+        if (e.key === 'Escape' || e.key.toLowerCase() === 'k') { e.preventDefault(); e.stopImmediatePropagation(); close(); }
+        else if (!['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) e.stopImmediatePropagation();
+        return;
+      }
+      if (e.key.toLowerCase() === 'k' && !overlayOpen()) { e.preventDefault(); e.stopImmediatePropagation(); open(); }
+    }, true);
+  }).catch(() => {});
 })();

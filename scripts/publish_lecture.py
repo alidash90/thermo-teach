@@ -28,6 +28,7 @@ import argparse, datetime, hashlib, json, os, re, shutil, subprocess, sys, tempf
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, 'scripts'))
+import book_assets  # noqa: E402
 import build_site  # noqa: E402
 
 NOINDEX = '<meta name="robots" content="noindex,nofollow">'
@@ -242,6 +243,15 @@ def main():
         die(f'images missing from {kind}: {", ".join(missing)}')
     print(f'  images: {len(wanted)} from {kind}')
 
+    book, book_problems = book_assets.build(fixes.data(content), dest)
+    if book:
+        with open(os.path.join(dest, 'book.json'), 'w', encoding='utf-8') as f:
+            json.dump(book, f, ensure_ascii=False)
+        nf = sum(len(v['figures']) for v in book.values())
+        ni = sum(1 for v in book.values() for fg in v['figures'] if fg['image'])
+        print(f'  book: {nf} figure(s) ({ni} with page image), {sum(len(v["examples"]) for v in book.values())} example(s) on {len(book)} slide(s)')
+    warnings += book_problems
+
     pdfs = list(old.get('pdfs', []))
     for spec in a.pdf:
         path, _, label = spec.partition(':')
@@ -257,6 +267,9 @@ def main():
     vreport = os.path.join(REPO, 'validation', f'{key}-lecture-{n}.md')
     subprocess.run([sys.executable, os.path.join(REPO, 'scripts', 'validate_numbers.py'), eff, vreport,
                     os.path.relpath(src, root) + ' (with corrections/)'], check=True)
+    subprocess.run([sys.executable, os.path.join(REPO, 'scripts', 'check_book.py'), eff,
+                    os.path.join(REPO, 'validation', f'{key}-lecture-{n}-book.md'),
+                    f'{c["code"]} Lecture {n}', f'{key}-lecture-{n}'], check=True)
     shutil.rmtree(eff, ignore_errors=True)
 
     meta = {'n': n, 'title': title, 'slides': len(content), 'solves': len(solves),

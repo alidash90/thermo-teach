@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .claude/
+# macOS/iCloud duplicate copies ("p-01 2.jpg")
+* [0-9].*

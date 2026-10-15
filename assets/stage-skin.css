@@ -20,6 +20,28 @@
 .skin-dock input[type=range]{width:64px;accent-color:var(--orange);margin:0 4px}
 .skin-go{color:#F28C3B;font-weight:700;font-size:.85rem;padding:0 6px}
 .skin-go[hidden]{display:none}
+.skin-chip{align-self:flex-start;background:transparent;border:1px solid var(--orange);color:var(--orange);border-radius:999px;padding:3px 10px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
+.skin-chip[hidden]{display:none}
+.skin-book{position:fixed;inset:0;background:var(--bg);color:var(--fg);z-index:22;overflow:auto;display:none;padding:4vh 16px 8vh}
+.skin-book.on{display:block}
+.bk-wrap{max-width:860px;margin:0 auto}
+.bk-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:.85rem;border-bottom:2px solid var(--orange);padding-bottom:8px;margin-bottom:18px}
+.bk-close{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+.bk-close kbd{font:inherit;font-size:.75rem;color:var(--muted);margin-left:4px}
+.bk-fig{margin:0 0 22px}
+.bk-fig img{max-width:100%;background:#fff;border:1px solid var(--line);border-radius:6px}
+.bk-fig figcaption,.bk-pending{font-size:1rem;line-height:1.5;margin-top:6px}
+.bk-fig span{display:block;color:var(--muted);font-size:.85rem}
+.bk-pending{border:1px dashed var(--line);border-radius:8px;padding:14px 16px}
+.bk-ex{font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.55;margin-bottom:26px}
+.bk-ex p{margin:0 0 10px}
+.bk-title{font-family:var(--display);font-size:1.35em;color:var(--navy);margin-bottom:10px}
+.bk-title b{color:var(--orange);margin-right:6px}
+.bk-stmt{font-style:italic}
+.bk-sol b{letter-spacing:.06em}
+.bk-steps{margin:4px 0 10px;padding-left:1.4em}
+.bk-steps li{margin:4px 0}
+.bk-src{color:var(--muted);font-size:.85em;border-top:1px solid var(--line);padding-top:8px}
 @media (max-width:1279px){.skin-dock input[type=range]{display:none}.skin-dock .pick{max-width:150px}}
 @media (max-width:700px){.skin-dock{flex-wrap:wrap;border-radius:18px}}
 @media (prefers-reduced-motion:reduce){.skin-dock{transition:none}}

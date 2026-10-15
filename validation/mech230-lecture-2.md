@@ -1,20 +1,19 @@
 # Number trace: courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage (with corrections/)
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 421; traced to the corpus: 344; untraced: 77.
+- Numbers checked (3+ significant digits): 421; traced to the corpus: 347; untraced: 74.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
-## Table lookups (check first): 5
+## Table lookups (check first): 4
 
 | Where | Field | Value | Context |
 |---|---|---|---|
 | P2 step 3 | tbl | 2.3583 | `001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583` |
-| P11 step 3 | tbl | 83.91 | `Table A-4: h₁ ≈ h_f@20 °C = 83.91; h₃ ≈ h_f@60 °C = 251.18.  Ta` |
 | P13 step 6 | tbl | 1.6724 | `Pa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724` |
 | P13 step 7 | tbl | 151.95 | `A-5 interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.` |
 | P13 step 7 | tbl | 1.1473 | `interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.1473 m³/kg` |
 
-## Solve steps (mostly computed results): 57
+## Solve steps (mostly computed results): 55
 
 | Where | Field | Value | Context |
 |---|---|---|---|
@@ -42,12 +41,10 @@
 | P10 step 4 | res | 2.082 | `\dot m=2.082\ \text{kg/s}` |
 | P10 step 5 | eq | 2.082 | `rm out}=\frac{\dot Q_{\rm out}}{\dot m}=\frac{25}{2.082}` |
 | P10 step 7 | eq | 2.082 | `\dot{\mathcal V}_2=\dot m\,v_2=(2.082)(1.31623)` |
-| P11 step 3 | num | 83.91 | `h_1=83.91,\quad h_2=2769.1,\quad h_3=25` |
 | P11 step 4 | num | 209.8 | `209.8+2769.1\,\dot m_2=627.95+251.1` |
 | P11 step 4 | num | 627.95 | `209.8+2769.1\,\dot m_2=627.95+251.18\,\dot m_2+20;\qquad 25` |
 | P11 step 4 | num | 2517.9 | `769.1\,\dot m_2=627.95+251.18\,\dot m_2+20;\qquad 2517.9\,\dot m_2=438.2` |
 | P11 step 4 | num | 438.2 | `27.95+251.18\,\dot m_2+20;\qquad 2517.9\,\dot m_2=438.2` |
-| P11 step 4 | eq | 83.91 | `(2.5)(83.91)+\dot m_2(2769.1)=(2.5+\dot m` |
 | P12 step 2 | res | 2676.4 | `h_2=2676.4\ \text{kJ/kg}` |
 | P12 step 3 | num | 2676.4 | `2676.4>2583.9\;\checkmark` |
 | P12 step 3 | eq | 2676.4 | `h_2=2676.4>h_{g@10\,kPa}\;\Rightarrow\;\` |

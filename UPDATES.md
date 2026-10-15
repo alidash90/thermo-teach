@@ -23,7 +23,7 @@ Changes made directly in the project folders. Re-read these files before writing
 2. MECH230 L2 `solves.json` and `study.html`, number fixes checked against Çengel 9e: E3 step 5 enthalpy drop 650 (not 587); P2 step 3 v_fg = 2.3583; P13 v_g − v_f = 1.1462; P13 step 6 back-reference "from Step 5"; P2 to P6 titles cite Ex 3-4, 3-5, 3-8, 3-7, 3-9; em dash removed from P1 step 3.
 3. MECH330 L2 `solves.json`, print pack `.tex` and PDF, `corrections.md`: P1 A-6 3.5 MPa/600 °C s = 7.4357; P3 y = 0.1726, 1 − y = 0.8274, q_in = 2923.5, q_out = 1492.4, η = 0.490 unchanged.
 4. The website rebuilds index.html from content.json + solves.json with the engine on every publish, so edit those two files, not index.html.
-Full log: `validation/DISCREPANCIES.md`.
+Full log: `validation/discrepancies.md`.
 Live checks passed 2026-10-14 17:40: slide 43 map and zoom, slide 47 schematic with Play, width slider saves, MathJax 0 errors, slide menu and number jump.
 
 ## 2026-10-14 (evening) · MECH230 L2 is now Stage v12: repo copies are OUTDATED and have DIVERGED
@@ -62,3 +62,6 @@ Problem 9 "Actual power" and Problem 10 "Mass flow from the inlet area" steps ga
 - Verified live at https://alidash90.github.io/thermo-teach/teach-1383d49e09/mech230/lecture-2/stage.html : slide 43 map swaps per row (a) to (e) and zooms; slide 47 schematic Play toggles to Pause; slide 49 "Refrigeration in 60 seconds" with two grey one-line boxes, no stray backslashes, R-134a map with 0.8 MPa and 0.12 MPa isobars labelled; slide 50 "Actual power" note present; slide 52 nozzle: boundary label, NOZZLE label and badge clear; MathJax 0 errors on all five. Study Desk (study.html) carries both new notes.
 - Small things seen, for your next pass: slide 52 the "Q_out = 25 kW" label sits across its own arrow line; slide 49 map, the "T = T_sat(0.12 MPa) = -22.32 °C" label overlaps the 0.12 MPa isobar where they meet.
 - The dock's lab button tooltip now reads "Figure lab (D)" to match your rename.
+
+## 2026-10-14 (night, 7) · MECH230 L2 Stage v20
+Map fix: point positions are now clamped inside the plot (the compressed-liquid offset had pushed Problem 11's two blue dots past the T axis), and Problem 11's (1)/(3) labels moved to the right of the liquid line. Re-import index.html, refresh stage_template.html.

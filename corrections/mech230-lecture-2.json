@@ -1,5 +1,5 @@
 {
- "note": "Verified corrections (see validation/DISCREPANCIES.md) applied by publish_lecture.py to solves.json strings and study.html on every import. A correction that stops matching is reported; delete it once the source carries the fix.",
+ "note": "Verified corrections (see validation/discrepancies.md) applied by publish_lecture.py to solves.json strings and study.html on every import. A correction that stops matching is reported; delete it once the source carries the fix.",
  "fixes": [
   {
    "why": "E3 step 5: enthalpy drop is 650 (587 = 81.6/0.139 includes ke and pe)",
@@ -65,6 +65,21 @@
    "why": "P6 is Example 3-9",
    "find": "Fill the table (a) to (e) (Ex 3-6)",
    "replace": "Fill the table (a) to (e) (Ex 3-9)"
+  },
+  {
+   "why": "P11: Table A-4 prints h_f at 20 °C as 83.915 (83.91 is a truncation); m_dot_2 = 0.174 kg/s unchanged",
+   "find": "h_f@20 °C = 83.91;",
+   "replace": "h_f@20 °C = 83.915;"
+  },
+  {
+   "why": "P11 step 3 numbers line, same value",
+   "find": "h_1=83.91,",
+   "replace": "h_1=83.915,"
+  },
+  {
+   "why": "P11 step 4 balance, same value",
+   "find": "(2.5)(83.91)",
+   "replace": "(2.5)(83.915)"
   }
  ]
 }
