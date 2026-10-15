@@ -50,7 +50,6 @@ No open findings.
 
 | Kind | Where | Value / id | Finding | Status |
 |---|---|---|---|---|
-| table value | P1 step 7 note | 6.6796 | A-6 nearest: s_kJ_per_kgK = 7.3706 at P_MPa=4.0, T_C=600 | open |
 | example fit | P1 | Ex 10-4 | 1 of 31 results found in "The Ideal Reheat Rankine Cycle" (pp. 557-559) | AU slides 4 to 6 use the 8e SI version of Example 10-4 (15 MPa, 600 °C, 10 kPa, x6 = 0.896, P_reheat = 4 MPa, eta = 0.450); the 9e prints Example 10-4 in English units and quotes 45.0 % on p. 567. Logged in assistant/cengel-study/corrections.md. |
 | example fit | P3 | Ex 10-6 | 14 of 43 results found in "The Ideal Reheat-Regenerative Rankine Cycle" (pp. 565-567) | Example 10-6 pump II: the book prints w = 3.83 kJ/kg and h4 = 643.92 (as if pump II delivered 4 MPa); the problem states 15 MPa, so the lecture uses 15.85 kJ/kg and h4 = 655.94 (eta 0.490 vs book 0.492). Book misprint list: Ex 10-6 cross-references quote values not derived in the text. Logged in corrections.md. |
 

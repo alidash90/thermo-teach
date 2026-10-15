@@ -2,15 +2,13 @@
 
 Against the Cengel 9e knowledge base (`courses/MECH330/resources/cengel/`, manifest + tables/A-*.csv). Made by `scripts/check_book.py`.
 
-- Table values: 45 matched to the printed digits, 1 not matched.
+- Table values: 45 matched to the printed digits, 0 not matched.
 - Citations: 14 resolved in the manifest, 1 found only in the book text (index gap), 0 missing.
 - Example fit: 2 of 4 solve blocks find most of their results in the cited example.
 
 ## Table values not matched
 
-| Where | Value | Finding |
-|---|---|---|
-| P1 step 7 note | 6.6796 | A-6 nearest: s_kJ_per_kgK = 7.3706 at P_MPa=4.0, T_C=600 |
+None.
 
 ## Citations
 
