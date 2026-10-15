@@ -3,7 +3,7 @@
 Against the Cengel 9e knowledge base (`courses/MECH330/resources/cengel/`, manifest + tables/A-*.csv). Made by `scripts/check_book.py`.
 
 - Table values: 36 matched to the printed digits, 0 not matched.
-- Citations: 12 resolved in the manifest, 1 found only in the book text (index gap), 0 missing.
+- Citations: 14 resolved in the manifest, 1 found only in the book text (index gap), 0 missing.
 - Example fit: 2 of 4 solve blocks find most of their results in the cited example.
 
 ## Table values not matched
@@ -15,7 +15,9 @@ None.
 | Kind | Id | Book | Status | Used in |
 |---|---|---|---|---|
 | equation | 8-5 | in the book text p. 418; not indexed in manifest.json | ok-text | 1 place(s) |
-| equation | 10-12 | q_in = q_primary + q_reheat = (h_3 − h_2) + (h_5 − h_4) | ok | 1 place(s) |
+| equation | 10-1 | (q_in − q_out) + (w_in − w_out) = h_e − h_i  (kJ/kg)** stead | ok | 1 place(s) |
+| equation | 10-8 | eta_th = w_net/q_in = 1 − q_out/q_in**, where w_net = q_in − | ok | 1 place(s) |
+| equation | 10-12 | q_in = q_primary + q_reheat = (h_3 − h_2) + (h_5 − h_4) | ok | 2 place(s) |
 | equation | 10-13 | w_turb,out = w_turb,I + w_turb,II = (h_3 − h_4) + (h_5 − h_6 | ok | 1 place(s) |
 | equation | 10-14 | q_in = h_5 − h_4 | ok | 1 place(s) |
 | equation | 10-23 | epsilon_u = (Net power output + Process heat delivered)/Tota | ok | 1 place(s) |
