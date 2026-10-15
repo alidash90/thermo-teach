@@ -4,3 +4,6 @@ __pycache__/
 .claude/
 # macOS/iCloud duplicate copies ("p-01 2.jpg")
 * [0-9].*
+# launchd run logs
+launchd/autopush.log
+launchd/autopush.err

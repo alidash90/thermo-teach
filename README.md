@@ -45,8 +45,8 @@ validation/                        per-lecture trace reports + discrepancies.md 
 7. Writes `lecture.json`, regenerates every index, commits and pushes.
 
 ## 4. Rules
-- The repo is the publishing place, never the editing place. Fix content in `courses/`, engine changes in `courses/_engine/`, then republish.
-- Ownership (Ali's decision, confirmed 2026-10-15 15:40): this Claude Code session owns the lecture content in `courses/<COURSE>/lectures/.../03_Lecture-Stage/`, the engine in `courses/_engine/lecture-stage/` and this site. The Cowork lecture agent does not write to those folders; it contributes drafts as separate files and lists them in `UPDATES.md`.
+- The repo is the publishing place, never the editing place.
+- Ownership (Ali's decision, final, 2026-10-15 17:00): the Cowork lecture agent owns and edits `courses/<COURSE>/lectures/Lecture-N/our-work/03_Lecture-Stage/` (content.json, solves.json, index.html) and `courses/_engine/lecture-stage/` (stage_template.html, build_stage.py, the manual). Claude Code never writes to those paths and never publishes from a copy other than those live files. Claude Code owns this repo: `assets/` (skin), `scripts/`, `corrections/`, `validation/`, `publish_lecture.py` and verification. Content findings go in `UPDATES.md` as findings, not fixes. Publishing is automatic: `scripts/autopush.sh` runs every 3 minutes under launchd (see `launchd/README.md`); Claude Code's routine is to watch `UPDATES.md`, verify what autopush publishes and keep the skin working.
 - Privacy (decided 2026-10-14): public repo, public landing and course pages; Stage and Study Desk only under the unlisted folder. Anyone who browses the repo on github.com can still find them; for real protection use a private repo with GitHub Pro.
 - Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/discrepancies.md`.
 
