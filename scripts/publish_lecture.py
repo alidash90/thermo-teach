@@ -60,6 +60,8 @@ class Corrections:
 
     def text(self, t):
         for i, fx in enumerate(self.fixes):
+            if fx['find'] in fx['replace'] and fx['replace'] in t:
+                continue  # already applied (the fix extends its own search text): never apply twice
             k = t.count(fx['find'])
             if k:
                 self.hits[i] += k

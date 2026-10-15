@@ -2,7 +2,7 @@
 
 Against the Cengel 9e knowledge base (`courses/MECH330/resources/cengel/`, manifest + tables/A-*.csv). Made by `scripts/check_book.py`.
 
-- Table values: 53 matched to the printed digits, 0 not matched.
+- Table values: 51 matched to the printed digits, 0 not matched.
 - Citations: 26 resolved in the manifest, 2 found only in the book text (index gap), 0 missing.
 - Example fit: 6 of 6 solve blocks find most of their results in the cited example.
 
@@ -63,7 +63,6 @@ None.
 | P2 step 3 tbl | 0.001036 | A-4 vf_m3_per_kg = 0.001036 |
 | P2 step 3 tbl | 2.3593 | A-4 vg_m3_per_kg = 2.3593 |
 | P2 step 3 tbl | 2.3583 | A-4 vg_m3_per_kg - vf_m3_per_kg = 2.3593 - 0.001036 = 2.358264 |
-| P2 step 3 tbl | 2.3583 | A-4 vg_m3_per_kg - vf_m3_per_kg = 2.3593 - 0.001036 = 2.358264 |
 | P3 step 2 tbl | 0.0007435 | A-12 vf_m3_per_kg = 0.0007435 |
 | P3 step 2 tbl | 0.12355 | A-12 vg_m3_per_kg = 0.12355 |
 | P3 step 4 tbl | 31.18 | A-12 hf_kJ_per_kg = 31.18 |
@@ -105,7 +104,6 @@ None.
 | P12 step 4 tbl | 2687.5 | A-6 h_kJ_per_kg = 2687.5 |
 | P13 step 6 tbl | 0.001043 | A-5 vf_m3_per_kg = 0.001043 |
 | P13 step 6 tbl | 1.6734 | A-5 vg_m3_per_kg = 1.6734 |
-| P13 step 6 tbl | 1.6724 | A-5 vg_m3_per_kg - vf_m3_per_kg = 1.6734 - 0.001043 = 1.672357 |
 | P13 step 6 tbl | 1.6724 | A-5 vg_m3_per_kg - vf_m3_per_kg = 1.6734 - 0.001043 = 1.672357 |
 | P13 step 7 tbl | 0.001053 | A-5 vf_m3_per_kg at P_kPa=151.95: 0.00105331 |
 | P13 step 7 tbl | 1.1473 | A-5 vg_m3_per_kg at P_kPa=151.95: 1.14726 |
