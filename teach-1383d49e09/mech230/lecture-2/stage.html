@@ -51,7 +51,7 @@ button{font:inherit;cursor:pointer}
 .sysk .expl{margin:8px 0 2px;padding:8px 12px;border-left:3px solid var(--orange);background:var(--orange-soft);font-size:clamp(.95rem,1.1vw,1.05rem);line-height:1.4}
 .sysk .expl b{color:var(--orange)}
 .cyc-pills{flex-wrap:wrap;margin-top:8px}
-.stepfig{display:grid;grid-template-columns:1.15fr 1fr;gap:10px;margin:8px 0 6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px}
+.stepfig{margin:6px 0 4px}
 .stepfig .sysk{margin:0;max-width:none}
 .stepfig .sysk .ctl{margin-top:2px;font-size:.8rem}
 .stepfig .fig{margin:0;border:0;padding:0;background:transparent;width:auto}
@@ -389,10 +389,9 @@ function makeSysSketch(sys){
 let curMap;
 function setMinimap(md){ let mm=document.querySelector('.minimap');
   if(!md){ curMap=null; if(mm) mm.remove(); return; }
-  if(md.kind==='ts'){ curMap=md; if(mm) mm.remove(); return; }
   if(md===curMap) return; curMap=md;
   if(!mm){ mm=document.createElement('div'); mm.className='minimap'; mm.title='Open the map full size'; document.querySelector('.notes').appendChild(mm); }
-  mm.innerHTML=''; const mc=document.createElement('div'); mc.className='mcap'; mc.textContent=(md.cap||(md.kind==='ts'?'T-s map':'T-v map'))+' · tap to zoom'; mm.appendChild(mc);
+  mm.innerHTML=''; const mc=document.createElement('div'); mc.className='mcap'; mc.textContent=(md.kind==='ts'?(md.cur!=null?'State '+md.cur:'The loop')+' on T-s':(md.cap||'T-v map'))+' · tap to zoom'; mm.appendChild(mc);
   mm.appendChild(md.kind==='ts'?makeCycleMap(md,true):makeDomeMap(md,true)); mm.onclick=()=>openTs('slidemap',md.title||'Where are we on the map?'); }
 function makeTs(mode){ if(mode==='slidemap'){ const m=curMap||(DATA[cur]&&DATA[cur].map)||{pts:[]}; return m.kind==='ts'?makeCycleMap(m,false):makeDomeMap(m,false); } if(mode==='cogen') return makeCogen(); if(mode==='energyBars') return makeEnergyBars(); if(mode==='cvDevice') return makeCvDevice(); if(mode==='domeTv') return makeDomeTv();
   const W=720,H=478,ml=58,mr=16,mt=18,mb=102; const cmp=s=>s<=0.6?s:(s<=8.2?0.6+(s-0.6)*0.5:0.6+7.6*0.5+(s-8.2)); const X=s=>ml+(cmp(s)/cmp(9.5))*(W-ml-mr), Y=T=>H-mb-(T/700)*(H-mt-mb);
@@ -798,14 +797,10 @@ function makeStepFig(md,csys){
   const w=document.createElement('div'); w.className='stepfig';
   const S={}; (md.states||[]).forEach(s=>S[String(s.k)]=s); const cur=md.cur!=null?String(md.cur):null; const st=cur?S[cur]:null;
   const arriving=cur?(md.procs||[]).find(p=>String(p.b)===cur&&!p.dash):null;
-  const left=document.createElement('div'); left.className='sf-sk';
-  if(csys){ left.appendChild(makeCycleSketch(Object.assign({},csys,{cur:cur,cap:null,focus:arriving?{t:arriving.dev,name:arriving.name||''}:null}))); }
-  const right=document.createElement('div'); right.className='sf-map'; const mp=makeCycleMap(Object.assign({},md,{compact:true}),false); right.appendChild(mp);
-  const en=document.createElement('button'); en.className='enl'; en.textContent='Enlarge ⤢'; en.onclick=ev=>{ ev.stopPropagation(); curMap=md; openTs('slidemap',md.title); }; right.appendChild(en);
   const cap=document.createElement('div'); cap.className='sf-cap';
   if(st){ cap.innerHTML='<b>Where are we?</b> State '+esc(st.alias||st.k)+': '+esc(fmtState(st))+'. '+esc(st.lab||'')+(arriving?' <span class="nxt"><b>How we got here:</b> '+esc((arriving.name||DEVNAME[arriving.dev]||arriving.dev)+', '+(S[String(arriving.a)]?(S[String(arriving.a)].alias||arriving.a):arriving.a)+' → '+(st.alias||st.k)+'. ')+esc(arriving.lab||DEVEXPL[arriving.dev]||'')+'</span>':''); }
   else cap.innerHTML='<b>The loop so far.</b> '+esc(md.title||'');
-  w.append(left,right,cap); return w;
+  w.append(cap); return w;
 }
 function makeCycleSketch(sys){
   // sys={dev:'cycle', layout:'rankine|reheat|regen-open|reheat-regen|cogen', cur, notes:{boiler:'…'}, cap, anim}
