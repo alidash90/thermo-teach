@@ -46,7 +46,7 @@ validation/                        per-lecture trace reports + discrepancies.md 
 
 ## 4. Rules
 - The repo is the publishing place, never the editing place. Fix content in `courses/`, engine changes in `courses/_engine/`, then republish.
-- Since 2026-10-15 this Claude Code session owns the lecture content and the engine (Ali's decision); the Cowork lecture agent no longer edits these folders.
+- Ownership (Ali's decision, confirmed 2026-10-15 15:40): this Claude Code session owns the lecture content in `courses/<COURSE>/lectures/.../03_Lecture-Stage/`, the engine in `courses/_engine/lecture-stage/` and this site. The Cowork lecture agent does not write to those folders; it contributes drafts as separate files and lists them in `UPDATES.md`.
 - Privacy (decided 2026-10-14): public repo, public landing and course pages; Stage and Study Desk only under the unlisted folder. Anyone who browses the repo on github.com can still find them; for real protection use a private repo with GitHub Pro.
 - Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/discrepancies.md`.
 
