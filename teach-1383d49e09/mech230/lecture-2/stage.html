@@ -119,6 +119,10 @@ g.callout{animation:pop .3s ease-out;transform-box:fill-box;transform-origin:cen
 .step .tbl{font-size:1.05rem;font-weight:600;color:var(--fg);margin:8px 0;padding:8px 12px;background:var(--orange-soft);border-left:4px solid var(--orange);border-radius:0 8px 8px 0}
 .step .tbl b{color:var(--orange);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;display:block;margin-bottom:2px}
 .step .note{font-size:.95rem;color:var(--muted);font-style:italic;margin:2px 0}
+.step ul.note.pts{font-style:normal;color:var(--fg);font-size:clamp(.95rem,1.15vw,1.08rem);line-height:1.45;margin:6px 0 4px;padding-left:1.2em}
+.step ul.note.pts li{margin:3px 0}
+.step ul.note.pts li::marker{color:var(--orange)}
+.step ul.note.pts b{color:var(--navy)}
 .step .num{margin:4px 0 2px;overflow-x:auto;display:none;background:var(--box);border-radius:6px;padding:6px 10px;font-size:clamp(1rem,1.25vw,1.15rem)}
 .step .num.show{display:block;animation:pop .3s}
 .step .res{margin:6px 0 2px;display:none;border:2px solid var(--green);border-radius:6px;padding:6px 10px;font-weight:700;font-size:clamp(1.05rem,1.35vw,1.25rem)}
@@ -191,6 +195,8 @@ let cur=0, built=0, askI=0, tHandle=null;
 try{ const c=parseInt(localStorage.getItem('stage_cur')); if(!isNaN(c)&&c>=0&&c<DATA.length) cur=c; }catch(e){}
 const $=id=>document.getElementById(id);
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+// step note: a string (one italic line) or a list of short points; **Label:** is bold
+function noteHtml(n){ if(!n) return ''; if(!Array.isArray(n)) return '<div class="note">'+esc(n)+'</div>'; return '<ul class="note pts">'+n.map(x=>'<li>'+esc(String(x)).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')+'</li>').join('')+'</ul>'; }
 function mth(t){ if(!t)return''; t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); if(t.length>60&&(t.includes(',\\qquad ')||t.includes(';\\qquad ')||t.includes(';\\quad '))){ const parts=t.split(/[,;]\\q?quad /); return '\\[\\begin{gathered}'+parts.join(' \\\\[3pt] ')+'\\end{gathered}\\]'; } return '\\['+t+'\\]'; }
 function parseLine(l){
   if(l.startsWith('@solve:')) return {kind:'solve',key:l.slice(7).trim()};
@@ -215,7 +221,7 @@ function render(){
   d.lines.forEach(l=>{
     const pl=parseLine(l); const {kind,html}=pl;
     if(kind==='solve'){ const sv=SOLVES[pl.key]; const box2=document.createElement('div'); box2.className='solve'; box2.innerHTML='<div class="st">'+esc(sv.title)+'</div>'; box.appendChild(box2); pendingHeads.forEach(h=>{}); const heads=pendingHeads; pendingHeads=[];
-      sv.steps.forEach((s,i)=>{ const d=document.createElement('div'); d.className='step'; d.innerHTML='<div class="sh"><span class="tag">Step '+(i+1)+'</span><span>'+esc(s.t)+'</span></div>'+(s.note?'<div class="note">'+esc(s.note)+'</div>':'')+'<div class="eq">'+mth(s.eq)+'</div>'+(s.tbl?'<div class="tbl"><b>&#128214; Using the table</b> '+esc(s.tbl)+'</div>':'')+'<div class="num">'+mth(s.num)+'</div>'+(s.res?'<div class="res">'+mth(s.res)+'</div>':''); box2.appendChild(d);
+      sv.steps.forEach((s,i)=>{ const d=document.createElement('div'); d.className='step'; d.innerHTML='<div class="sh"><span class="tag">Step '+(i+1)+'</span><span>'+esc(s.t)+'</span></div>'+noteHtml(s.note)+'<div class="eq">'+mth(s.eq)+'</div>'+(s.tbl?'<div class="tbl"><b>&#128214; Using the table</b> '+esc(s.tbl)+'</div>':'')+'<div class="num">'+mth(s.num)+'</div>'+(s.res?'<div class="res">'+mth(s.res)+'</div>':''); box2.appendChild(d);
         if(s.sys){ const sk=makeSysSketch(s.sys); const eqEl=d.querySelector('.eq'); d.insertBefore(sk,eqEl); }
         steps.push({type:'line',el:d,heads:i===0?heads:[],map:s.map||null}); steps.push({type:'show',el:d.querySelector('.num')}); if(s.res) steps.push({type:'show',el:d.querySelector('.res')}); });
       return; }

@@ -200,6 +200,7 @@ def table_checks(k, folder, misprints):
         for i, st in enumerate(blk.get('steps', [])):
             for fld in ('tbl', 'note'):
                 text = st.get(fld) or ''
+                text = ' '.join(text) if isinstance(text, list) else text
                 marks = list(TABLE.finditer(text))
                 if not marks:
                     continue

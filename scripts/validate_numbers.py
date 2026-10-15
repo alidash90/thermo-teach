@@ -63,7 +63,8 @@ def items(folder):
             for i, st in enumerate(blk.get('steps', [])):
                 for fld in ('tbl', 'num', 'res', 'eq', 'note', 't'):
                     if st.get(fld):
-                        yield (1 if fld == 'tbl' else 2), f'{key} step {i + 1}', fld, st[fld]
+                        v = st[fld]
+                        yield (1 if fld == 'tbl' else 2), f'{key} step {i + 1}', fld, ' '.join(v) if isinstance(v, list) else v
 
 
 def main():
