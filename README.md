@@ -40,12 +40,13 @@ validation/                        per-lecture trace reports + discrepancies.md 
 3. Study Desk: copies `study.html` if present; the course page shows "not built" otherwise.
 4. Images: copies every `img/p-NN.jpg` the pages reference, from `img/`, else the `img/` inside a `*.zip` in the folder, else `Lecture-N/au-slide-images/`. Stops if one is missing.
 5. Wraps the Stage fragment in a full UTF-8 document (claude.ai artifacts do this for the engine output), adds `noindex` to every lecture page, and adds the website skin to the Stage (dock, slide menu, number jump, saved slide per lecture).
-   Corrections from `corrections/<course>-lecture-N.json` are applied to content.json, solves.json and study.html before building; a correction that no longer matches is reported so it can be deleted.
+   Corrections from `corrections/<course>-lecture-N.json` are applied to content.json, solves.json and study.html before building. Since 2026-10-15 they are also written into the sources, so they normally report "already in the source"; they stay as a safety net in case an older copy of a lecture overwrites the fixes.
 6. Warns on em dashes and on missing MathJax; writes `validation/<course>-lecture-N.md`.
 7. Writes `lecture.json`, regenerates every index, commits and pushes.
 
 ## 4. Rules
 - The repo is the publishing place, never the editing place. Fix content in `courses/`, engine changes in `courses/_engine/`, then republish.
+- Since 2026-10-15 this Claude Code session owns the lecture content and the engine (Ali's decision); the Cowork lecture agent no longer edits these folders.
 - Privacy (decided 2026-10-14): public repo, public landing and course pages; Stage and Study Desk only under the unlisted folder. Anyone who browses the repo on github.com can still find them; for real protection use a private repo with GitHub Pro.
 - Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/discrepancies.md`.
 

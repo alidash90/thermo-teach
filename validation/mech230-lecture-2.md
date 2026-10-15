@@ -1,15 +1,17 @@
 # Number trace: courses/MECH230/lectures/Lecture-2/our-work/03_Lecture-Stage (with corrections/)
 
 - Corpus: 92 files from the Çengel 9e digest and the 10e Connect markdown.
-- Numbers checked (3+ significant digits): 421; traced to the corpus: 347; untraced: 74.
+- Numbers checked (3+ significant digits): 423; traced to the corpus: 347; untraced: 76.
 - Untraced is not an error by itself: computed results rarely appear verbatim. Review the table lookups first.
 
-## Table lookups (check first): 4
+## Table lookups (check first): 6
 
 | Where | Field | Value | Context |
 |---|---|---|---|
-| P2 step 3 | tbl | 2.3583 | `001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583` |
-| P13 step 6 | tbl | 1.6724 | `Pa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724` |
+| P2 step 3 | tbl | 2.3583 | `001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583, so v_fg = v_g − v_f = 2.3583` |
+| P2 step 3 | tbl | 2.3583 | `001036, v_g = 2.3593 m³/kg, so v_fg = v_g − v_f = 2.3583, so v_fg = v_g − v_f = 2.3583` |
+| P13 step 6 | tbl | 1.6724 | `Pa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724, so v_fg = 1.6724` |
+| P13 step 6 | tbl | 1.6724 | `Pa: v_f = 0.001043, v_g = 1.6734 m³/kg, so v_fg = 1.6724, so v_fg = 1.6724` |
 | P13 step 7 | tbl | 151.95 | `A-5 interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.` |
 | P13 step 7 | tbl | 1.1473 | `interpolated at 151.95 kPa: v_f ≈ 0.001053, v_g ≈ 1.1473 m³/kg` |
 

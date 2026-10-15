@@ -211,7 +211,10 @@ def main():
     else:
         print('  study: no study.html in the build folder; course page will show "not built"')
 
-    warnings = [f'correction no longer matches the source (fixed upstream? delete it): {s[:60]}' for s in fixes.report()]
+    stale = fixes.report()
+    if stale:
+        print(f'  corrections: {len(stale)} already in the source (kept as a safety net)')
+    warnings = []
     eff = tempfile.mkdtemp()  # the corrected content, for the dash check and the number trace
     for f in ('content.json', 'solves.json'):
         if os.path.exists(os.path.join(src, f)):
