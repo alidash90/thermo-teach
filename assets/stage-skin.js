@@ -69,9 +69,27 @@
   });
   document.body.appendChild(dock);
 
+  // Way back: the course page (all lectures), from the top bar.
+  const bar = document.querySelector('.bar');
+  if (bar) {
+    const home = document.createElement('a');
+    home.className = 'skin-home'; home.href = '../';
+    home.title = 'All lectures of this course'; home.setAttribute('aria-label', home.title);
+    home.innerHTML = svg('<path d="M15 6l-6 6 6 6"/>') + '<span>Lectures</span>';
+    bar.prepend(home);
+  }
+
   // The engine rewrites the width button's label on every change; put the icon back.
   const split = $('bSplit');
-  if (split) new MutationObserver(() => { if (!split.querySelector('svg')) iconise('bSplit'); placeDock(); })
+  let dragging = false;
+  const range = $('splitRange');
+  if (range) {
+    range.addEventListener('pointerdown', () => { dragging = true; });
+    const release = () => { if (dragging) { dragging = false; placeDock(); } };
+    ['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, release));
+    range.addEventListener('change', release);
+  }
+  if (split) new MutationObserver(() => { if (!split.querySelector('svg')) iconise('bSplit'); if (!dragging) placeDock(); })
     .observe(split, { childList: true, characterData: true, subtree: true });
 
   // Keep the picker in step with the engine's slide counter.
@@ -90,7 +108,7 @@
     dock.style.left = Math.max(w / 2 + 12, Math.min(vw - w / 2 - 12, x)) + 'px';
   }
   function showDock() {
-    if (dock.classList.contains('idle')) placeDock();
+    if (dock.classList.contains('idle') && !dragging) placeDock();
     dock.classList.remove('idle');
     clearTimeout(idleT);
     idleT = setTimeout(() => {

@@ -34,6 +34,9 @@ import build_site  # noqa: E402
 NOINDEX = '<meta name="robots" content="noindex,nofollow">'
 MATHJAX = 'cdnjs.cloudflare.com/ajax/libs/mathjax/'
 SKIN_BASE = '../../../assets/'  # from <unlisted>/<course>/lecture-N/
+BACK_LINK = ('<a href="../" title="All lectures of this course" style="position:fixed;top:10px;right:12px;z-index:50;'
+             'font:600 13px system-ui,sans-serif;text-decoration:none;color:#003C7B;background:#fff;border:1px solid #DDD9D0;'
+             'border-radius:999px;padding:6px 12px;box-shadow:0 2px 8px rgba(0,0,0,.12)">&#8249; Lectures</a>')
 
 
 def die(msg):
@@ -226,7 +229,10 @@ def main():
         if MATHJAX not in html:
             warnings.append(f'{name}: MathJax from cdnjs not found')
         with open(os.path.join(dest, name), 'w', encoding='utf-8') as f:
-            f.write(for_web(html, skin=(name == 'stage.html')))
+            page = for_web(html, skin=(name == 'stage.html'))
+            if name != 'stage.html':
+                page = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + BACK_LINK, page, count=1, flags=re.I)
+            f.write(page)
 
     wanted = sorted({os.path.basename(s['img']) for s in content if s.get('img')}
                     | {mm for h in pages.values() for mm in re.findall(r'img/(p-\d+\.jpe?g)', h)})

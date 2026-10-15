@@ -20,6 +20,9 @@
 .skin-dock input[type=range]{width:64px;accent-color:var(--orange);margin:0 4px}
 .skin-go{color:#F28C3B;font-weight:700;font-size:.85rem;padding:0 6px}
 .skin-go[hidden]{display:none}
+.skin-home{display:inline-flex;align-items:center;gap:4px;flex:none;color:var(--muted);text-decoration:none;font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 6px}
+.skin-home:hover{color:var(--fg);border-color:var(--orange)}
+.skin-home svg{width:15px;height:15px}
 .skin-chip{align-self:flex-start;background:transparent;border:1px solid var(--orange);color:var(--orange);border-radius:999px;padding:3px 10px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
 .skin-chip[hidden]{display:none}
 .skin-book{position:fixed;inset:0;background:var(--bg);color:var(--fg);z-index:22;overflow:auto;display:none;padding:4vh 16px 8vh}
