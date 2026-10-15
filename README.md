@@ -50,6 +50,10 @@ validation/                        per-lecture trace reports + discrepancies.md 
 - Privacy (decided 2026-10-14): public repo, public landing and course pages; Stage and Study Desk only under the unlisted folder. Anyone who browses the repo on github.com can still find them; for real protection use a private repo with GitHub Pro.
 - Validate before publishing: read the trace report, recheck untraced table lookups, log confirmed findings in `validation/discrepancies.md`.
 
+## 5. Figures the engine can draw (see the Build Manual, section 5)
+- Thermo I: T-v maps per solve step (`map`), animated device schematics (`sys`), energy bars, dome built live.
+- Thermo II (added 2026-10-15): a T-s cycle map that fills in state by state as the solution advances (`cycle` on the solve block, `map.show` / `map.cur` per step; tap a state, a line or a pill in the lab for its explanation) and animated plant schematics (`sys: {dev: "cycle", layout: rankine | reheat | regen-open | reheat-regen | cogen}`; Play animates the flow; tap a device to explain it).
+
 ## 5. Ready for later (not built yet)
 - Student view: a second engine output without answers, published to the public course pages (`lecture.json` can carry a `student` flag).
 - Syllabus weeks to lectures: add a `weeks` map to `site.json` and render it on the public course page.

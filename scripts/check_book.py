@@ -111,6 +111,8 @@ def check_part(k, tid, part, context, misprints):
     except FileNotFoundError:
         return [('no-csv', tid, f'{tid} has no CSV in the knowledge base')]
     interp = 'interpolat' in part.lower()
+    if re.search(r'\bno\b[^.;]*\brow\b|\bnot\b|\bexactly\b', part, re.I):
+        return out  # a negation ("no 4 MPa row has s = 6.6796 exactly"): the numbers are the problem's own, not table cells
     for mt in NUM.finditer(part):
         tok = mt.group(0)
         if re.match(r'\s*m³(?!/)', part[mt.end():]):
