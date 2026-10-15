@@ -2,13 +2,15 @@
 
 Against the Cengel 9e knowledge base (`courses/MECH330/resources/cengel/`, manifest + tables/A-*.csv). Made by `scripts/check_book.py`.
 
-- Table values: 36 matched to the printed digits, 0 not matched.
+- Table values: 45 matched to the printed digits, 1 not matched.
 - Citations: 14 resolved in the manifest, 1 found only in the book text (index gap), 0 missing.
 - Example fit: 2 of 4 solve blocks find most of their results in the cited example.
 
 ## Table values not matched
 
-None.
+| Where | Value | Finding |
+|---|---|---|
+| P1 step 7 note | 6.6796 | A-6 nearest: s_kJ_per_kgK = 7.3706 at P_MPa=4.0, T_C=600 |
 
 ## Citations
 
@@ -34,9 +36,9 @@ None.
 
 | Block | Cites | Book title | Pages | Found |
 |---|---|---|---|---|
-| P1 | Ex 10-4 | The Ideal Reheat Rankine Cycle | 557-559 | 0 of 26 (check the citation) |
-| P2 | Ex 10-5 | The Ideal Regenerative Rankine Cycle | 562-564 | 22 of 32 |
-| P3 | Ex 10-6 | The Ideal Reheat-Regenerative Rankine Cycle | 565-567 | 14 of 32 (check the citation) |
+| P1 | Ex 10-4 | The Ideal Reheat Rankine Cycle | 557-559 | 1 of 31 (check the citation) |
+| P2 | Ex 10-5 | The Ideal Regenerative Rankine Cycle | 562-564 | 23 of 38 |
+| P3 | Ex 10-6 | The Ideal Reheat-Regenerative Rankine Cycle | 565-567 | 14 of 43 (check the citation) |
 | P4 | Ex 10-8 | An Ideal Cogeneration Plant | 572-574 | 18 of 26 |
 
 ## Table values matched
@@ -52,17 +54,17 @@ None.
 | P1 step 6 tbl | 7.3127 | A-6 s_kJ_per_kgK = 7.3127 |
 | P1 step 7 tbl | 2.7966 | A-5 sf_kJ_per_kgK = 2.7966 |
 | P1 step 7 tbl | 6.0696 | A-5 sg_kJ_per_kgK = 6.0696 |
-| P1 step 7 tbl | 6.5843 | A-6 s_kJ_per_kgK = 6.5843 |
-| P1 step 7 tbl | 3093.3 | A-6 h_kJ_per_kg = 3093.3 |
-| P1 step 7 tbl | 6.7714 | A-6 s_kJ_per_kgK = 6.7714 |
-| P1 step 7 tbl | 3214.5 | A-6 h_kJ_per_kg = 3214.5 |
+| P1 step 8 tbl | 6.5843 | A-6 s_kJ_per_kgK = 6.5843 |
+| P1 step 8 tbl | 3093.3 | A-6 h_kJ_per_kg = 3093.3 |
+| P1 step 8 tbl | 6.7714 | A-6 s_kJ_per_kgK = 6.7714 |
+| P1 step 8 tbl | 3214.5 | A-6 h_kJ_per_kg = 3214.5 |
 | P2 step 5 tbl | 6.5217 | A-5 sg_kJ_per_kgK = 6.5217 |
-| P2 step 5 tbl | 6.5909 | A-6 s_kJ_per_kgK = 6.5909 |
-| P2 step 5 tbl | 2816.1 | A-6 h_kJ_per_kg = 2816.1 |
-| P2 step 5 tbl | 6.8313 | A-6 s_kJ_per_kgK = 6.8313 |
-| P2 step 5 tbl | 2935.6 | A-6 h_kJ_per_kg = 2935.6 |
-| P2 step 6 tbl | 0.6492 | A-5 sf_kJ_per_kgK = 0.6492 |
-| P2 step 6 tbl | 8.1488 | A-5 sg_kJ_per_kgK = 8.1488 |
+| P2 step 6 tbl | 6.5909 | A-6 s_kJ_per_kgK = 6.5909 |
+| P2 step 6 tbl | 2816.1 | A-6 h_kJ_per_kg = 2816.1 |
+| P2 step 6 tbl | 6.8313 | A-6 s_kJ_per_kgK = 6.8313 |
+| P2 step 6 tbl | 2935.6 | A-6 h_kJ_per_kg = 2935.6 |
+| P2 step 9 tbl | 0.6492 | A-5 sf_kJ_per_kgK = 0.6492 |
+| P2 step 9 tbl | 8.1488 | A-5 sg_kJ_per_kgK = 8.1488 |
 | P3 step 2 tbl | 191.81 | A-5 hf_kJ_per_kg = 191.81 |
 | P3 step 2 tbl | 0.00101 | A-5 vf_m3_per_kg = 0.001010 |
 | P3 step 2 tbl | 640.09 | A-5 hf_kJ_per_kg = 640.09 |
@@ -70,6 +72,15 @@ None.
 | P3 step 3 tbl | 1087.4 | A-5 hf_kJ_per_kg = 1087.4 |
 | P3 step 3 tbl | 0.001252 | A-5 vf_m3_per_kg = 0.001252 |
 | P3 step 3 tbl | 2.7966 | A-5 sf_kJ_per_kgK = 2.7966 |
+| P3 step 4 tbl | 3583.1 | A-6 h_kJ_per_kg = 3583.1 |
+| P3 step 4 tbl | 6.6796 | A-6 s_kJ_per_kgK = 6.6796 |
+| P3 step 4 tbl | 3674.9 | A-6 h_kJ_per_kg = 3674.9 |
+| P3 step 4 tbl | 7.3706 | A-6 s_kJ_per_kgK = 7.3706 |
+| P3 step 5 tbl | 6.8207 | A-5 sg_kJ_per_kgK = 6.8207 |
+| P3 step 6 tbl | 7.2725 | A-6 s_kJ_per_kgK = 7.2725 |
+| P3 step 6 tbl | 2961.0 | A-6 h_kJ_per_kg = 2961.0 |
+| P3 step 6 tbl | 7.4614 | A-6 s_kJ_per_kgK = 7.4614 |
+| P3 step 6 tbl | 3064.6 | A-6 h_kJ_per_kg = 3064.6 |
 | P4 step 2 tbl | 6.8207 | A-5 sg_kJ_per_kgK = 6.8207 |
 | P4 step 2 tbl | 1.8604 | A-5 sf_kJ_per_kgK = 1.8604 |
 | P4 step 2 tbl | 4.9603 | A-5 sfg_kJ_per_kgK = 4.9603 |

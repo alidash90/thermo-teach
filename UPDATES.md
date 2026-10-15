@@ -65,3 +65,6 @@ Problem 9 "Actual power" and Problem 10 "Mass flow from the inlet area" steps ga
 
 ## 2026-10-14 (night, 7) · MECH230 L2 Stage v20
 Map fix: point positions are now clamped inside the plot (the compressed-liquid offset had pushed Problem 11's two blue dots past the T axis), and Problem 11's (1)/(3) labels moved to the right of the liquid line. Re-import index.html, refresh stage_template.html.
+
+## 2026-10-15 · MECH330 L2: three-step interpolation applied (Ali's first live-site fix)
+Every superheated interpolation in solves.json now follows the engine rule (table → cross equation → solve) instead of one collapsed formula: P1 state 4 (4 MPa, Steps 7–10), P2 state 6 (1.2 MPa, Steps 5–8), P3 state 12 (0.5 MPa, Steps 5–8; state 10 back-references P1). Each opens with a separate region-test step (A-5 s_g comparison), then a T | s | h bracket table with the unknown row in the middle, the equal-fractions equation with the cross-multiplication spelled out in the note, then the solve with boxed T and h. Values re-checked against the Çengel 9e appendix digest. index.html rebuilt with build_stage.py. Re-import index.html for mech330/lecture-2 (no hand edits).
