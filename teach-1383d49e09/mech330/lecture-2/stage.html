@@ -51,6 +51,16 @@ button{font:inherit;cursor:pointer}
 .sysk .expl{margin:8px 0 2px;padding:8px 12px;border-left:3px solid var(--orange);background:var(--orange-soft);font-size:clamp(.95rem,1.1vw,1.05rem);line-height:1.4}
 .sysk .expl b{color:var(--orange)}
 .cyc-pills{flex-wrap:wrap;margin-top:8px}
+.stepfig{display:grid;grid-template-columns:1.15fr 1fr;gap:10px;margin:8px 0 6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px}
+.stepfig .sysk{margin:0;max-width:none}
+.stepfig .sysk .ctl{margin-top:2px;font-size:.8rem}
+.stepfig .fig{margin:0;border:0;padding:0;background:transparent;width:auto}
+.stepfig .sf-cap{grid-column:1/-1;font-size:clamp(.95rem,1.12vw,1.08rem);line-height:1.42;border-left:3px solid var(--orange);padding:6px 10px;background:var(--orange-soft)}
+.stepfig .sf-cap b{color:var(--orange)}
+.stepfig .sf-cap .nxt{color:var(--muted)}
+.stepfig .enl{position:absolute;right:6px;top:4px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:6px;padding:2px 8px;font-size:.75rem}
+.stepfig .sf-map{position:relative}
+@media (max-width:1100px){.stepfig{grid-template-columns:1fr}}
 .cyc-pills button{font-weight:600}
 .sysk .cap{font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-top:2px;text-align:center}
 .notes h1{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.15;margin:0 0 10px;text-wrap:balance;color:var(--fg)}
@@ -230,6 +240,7 @@ function render(){
       sv.steps.forEach((s,i)=>{ const d=document.createElement('div'); d.className='step'; d.innerHTML='<div class="sh"><span class="tag">Step '+(i+1)+'</span><span>'+esc(s.t)+'</span></div>'+noteHtml(s.note)+'<div class="eq">'+mth(s.eq)+'</div>'+(s.tbl?'<div class="tbl"><b>&#128214; Using the table</b> '+esc(s.tbl)+'</div>':'')+'<div class="num">'+mth(s.num)+'</div>'+(s.res?'<div class="res">'+mth(s.res)+'</div>':''); box2.appendChild(d);
         if(s.sys){ const sk=makeSysSketch(s.sys); const eqEl=d.querySelector('.eq'); d.insertBefore(sk,eqEl); }
         let mp=s.map||null; if(mp&&sv.cycle&&(mp.show||mp.cycle)) mp=Object.assign({kind:'ts'},sv.cycle,{show:mp.show||[],cur:mp.cur!=null?mp.cur:null,cap:mp.cap||sv.cycle.cap,title:mp.title||sv.cycle.title});
+        if(mp&&mp.kind==='ts'&&mp.show.length&&!s.sys){ const csys=(sv.steps.find(x=>x.sys&&x.sys.dev==='cycle')||{}).sys; const eqEl=d.querySelector('.eq'); d.insertBefore(makeStepFig(mp,csys),eqEl); }
         steps.push({type:'line',el:d,heads:i===0?heads:[],map:mp}); steps.push({type:'show',el:d.querySelector('.num')}); if(s.res) steps.push({type:'show',el:d.querySelector('.res')}); });
       return; }
     if(kind==='fig'){ const f=makeTs(pl.mode); f.classList.add('line','infig'); const c=document.createElement('div'); c.className='cap'; c.textContent=pl.cap||''; const en=document.createElement('button'); en.className='enl'; en.textContent='Enlarge ⤢'; en.onclick=()=>openTs(pl.mode); c.appendChild(en); f.insertBefore(c,f.firstChild); box.appendChild(f); steps.push({type:'line',el:f,heads:pendingHeads}); pendingHeads=[]; return; }
@@ -378,6 +389,7 @@ function makeSysSketch(sys){
 let curMap;
 function setMinimap(md){ let mm=document.querySelector('.minimap');
   if(!md){ curMap=null; if(mm) mm.remove(); return; }
+  if(md.kind==='ts'){ curMap=md; if(mm) mm.remove(); return; }
   if(md===curMap) return; curMap=md;
   if(!mm){ mm=document.createElement('div'); mm.className='minimap'; mm.title='Open the map full size'; document.querySelector('.notes').appendChild(mm); }
   mm.innerHTML=''; const mc=document.createElement('div'); mc.className='mcap'; mc.textContent=(md.cap||(md.kind==='ts'?'T-s map':'T-v map'))+' · tap to zoom'; mm.appendChild(mc);
@@ -706,12 +718,12 @@ function makeCycleMap(md,mini){
   // md={kind:'ts',title,cap,states:[{k,alias,P(MPa),T,s,h,x,lab,liq,dy}],procs:[{a,b,dev,name,lab,dash}],show:[keys],cur}
   const states=md.states||[], procs=md.procs||[], S={}; states.forEach(s=>S[String(s.k)]=s);
   const show=new Set((md.show||[]).map(String)); let curK=md.cur!=null?String(md.cur):null;
-  const W=720,H=mini?400:478, ml=mini?30:58, mr=mini?12:16, mt=mini?16:20, mb=mini?26:(procs.length?124:96);
+  const compact=!!md.compact; const W=720,H=mini?400:(compact?400:478), ml=mini?30:58, mr=mini?12:16, mt=mini?16:20, mb=mini?26:(compact?50:(procs.length?124:96));
   const cmp=s=>s<=0.6?s:(s<=8.2?0.6+(s-0.6)*0.5:0.6+7.6*0.5+(s-8.2)); const X=s=>Math.min(W-mr,Math.max(ml,ml+(cmp(s)/cmp(9.7))*(W-ml-mr))), Y=T=>H-mb-(T/700)*(H-mt-mb);
   const wrap=document.createElement('div'); if(!mini) wrap.className='fig';
   const ns='http://www.w3.org/2000/svg'; const svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); wrap.appendChild(svg);
   const cs=getComputedStyle(document.documentElement), C={fg:cs.getPropertyValue('--fg').trim(),mu:cs.getPropertyValue('--muted').trim(),or:cs.getPropertyValue('--orange').trim(),nv:cs.getPropertyValue('--navy').trim(),ln:cs.getPropertyValue('--line').trim(),pn:cs.getPropertyValue('--panel').trim()};
-  let expl=null,pills=null; if(!mini){ expl=document.createElement('div'); expl.className='expl'; expl.hidden=true; wrap.appendChild(expl); pills=document.createElement('div'); pills.className='mode cyc-pills'; wrap.appendChild(pills); }
+  let expl=null,pills=null; if(!mini&&!compact){ expl=document.createElement('div'); expl.className='expl'; expl.hidden=true; wrap.appendChild(expl); pills=document.createElement('div'); pills.className='mode cyc-pills'; wrap.appendChild(pills); }
   const stateDev=k=>{ const p=procs.find(q=>String(q.b)===k&&!q.dash); return p?(DEVK[p.dev]||C.nv):C.nv; };
   function procPts(p){ const A=S[String(p.a)],B=S[String(p.b)]; if(!A||!B) return []; const dev=p.dev||'';
     if(!p.dash&&(dev==='boiler'||dev==='reheat'||dev==='fwh'||dev==='cfwh'||dev==='heater')){ const P=B.P!=null?B.P:A.P; if(P==null) return [[A.s,A.T],[B.s,B.T]]; const iso=isoAt(P); const pts=[];
@@ -752,12 +764,12 @@ function makeCycleMap(md,mini){
       if(!mini) c.addEventListener('click',()=>pick('s'+k));
       const tx=label(q.x,q.y,mini?k:'('+(st.alias||k)+')',isCur?C.or:col,mini?30:13); if(dim) tx.setAttribute('opacity',.3); if(!mini){ tx.setAttribute('class','hit'); tx.addEventListener('click',()=>pick('s'+k)); } });
     if(!mini){ [[X(4.6),Y(150),'wet region (liquid + vapour)',C.mu,'italic'],[X(8.4),Y(430),'superheated vapour','#C0392B','normal']].forEach(([x,y,t,col,fs])=>{ const r={x:x-t.length*3.6,y:y-12,w:t.length*7.2,h:14}; if(fits(r)){ placed.push(r); el('text',{x,y,'text-anchor':'middle','font-size':12,fill:col,'font-style':fs,'font-weight':fs==='normal'?700:400},t); } });
-      const devs=[...new Set(procs.filter(p=>!p.dash).map(p=>p.dev))]; const y0=H-58; el('text',{x:ml,y:y0,'font-size':9.5,fill:C.mu,'font-weight':700,'letter-spacing':'.08em'},'COLOUR = WHICH DEVICE THE FLUID IS IN · tap a state, a line or a pill to explain it'); const colW=(W-ml-mr)/4;
+      if(compact) return; const devs=[...new Set(procs.filter(p=>!p.dash).map(p=>p.dev))]; const y0=H-58; el('text',{x:ml,y:y0,'font-size':9.5,fill:C.mu,'font-weight':700,'letter-spacing':'.08em'},'COLOUR = WHICH DEVICE THE FLUID IS IN · tap a state, a line or a pill to explain it'); const colW=(W-ml-mr)/4;
       devs.forEach((d,i)=>{ const cx=ml+(i%4)*colW, cy=y0+16+Math.floor(i/4)*15; el('line',{x1:cx,y1:cy-3,x2:cx+18,y2:cy-3,stroke:DEVK[d]||C.mu,'stroke-width':4,'stroke-linecap':'round'}); el('text',{x:cx+24,y:cy,'font-size':10,fill:C.fg},DEVNAME[d]||d); });
       pills.innerHTML=''; procs.forEach((p,i)=>{ if(!(show.has(String(p.a))&&show.has(String(p.b)))) return; const b=document.createElement('button'); b.textContent=(S[String(p.a)].alias||p.a)+' → '+(S[String(p.b)].alias||p.b)+'  '+(p.name||DEVNAME[p.dev]||p.dev); b.style.borderColor=DEVK[p.dev]||''; if(sel==='p'+i){ b.classList.add('on'); b.style.background=DEVK[p.dev]||''; b.style.color='#fff'; } b.onclick=()=>pick('p'+i); pills.appendChild(b); });
       if(sel==null) expl.hidden=true; }
   }
-  function pick(id){ sel=(sel===id)?null:id; draw(); if(sel==null||mini) return; expl.hidden=false;
+  function pick(id){ if(compact){ curMap=md; openTs('slidemap',md.title); return; } sel=(sel===id)?null:id; draw(); if(sel==null||mini) return; expl.hidden=false;
     if(sel[0]==='p'){ const p=procs[+sel.slice(1)]; expl.innerHTML='<b>'+esc((p.name||DEVNAME[p.dev]||p.dev)+' · '+(S[String(p.a)].alias||p.a)+' → '+(S[String(p.b)].alias||p.b))+'</b> '+esc(p.lab||DEVEXPL[p.dev]||''); }
     else { const st=S[sel.slice(1)]; expl.innerHTML='<b>State '+esc(st.alias||st.k)+'</b> '+esc(fmtState(st))+(st.lab?'<br>'+esc(st.lab):''); } }
   draw();
@@ -781,9 +793,23 @@ const CYCLE_LAYOUTS={
   pipes:[{pts:[[150,75],[230,75]],st:'1'},{pts:[[230,75],[300,75]],st:'3'},{pts:[[230,75],[230,136]],st:'2'},{pts:[[230,164],[230,230]],st:'4'},{pts:[[365,118],[365,255],[300,255]],st:'5',at:.45},{pts:[[415,125],[415,150],[630,150],[630,220]],st:'6',at:.55},{pts:[[245,280],[245,320],[206,320]],st:'7',liq:true,at:.35},{pts:[[174,320],[95,320],[95,270]],st:'10',liq:true,at:.45},{pts:[[630,280],[630,309]],st:'8',liq:true},{pts:[[630,341],[630,352],[40,352],[40,250],[65,250]],st:'9',liq:true,at:.3},{pts:[[95,230],[95,160]],st:'11',liq:true}],
   arrows:[{x1:430,y1:80,x2:495,y2:80,col:'#7B4FD6',lab:'W_out'},{x1:680,y1:250,x2:712,y2:250,col:'#C0392B',lab:'Q_out',dy:-8},{x1:190,y1:255,x2:150,y2:255,col:'#C0392B',lab:'Q_p',dy:-8}]}
 };
+function makeStepFig(md,csys){
+  // One step of a cycle solution: the plant with the current state lit and its device haloed (left), the T-s map so far (right), one line on where we are and how we got here.
+  const w=document.createElement('div'); w.className='stepfig';
+  const S={}; (md.states||[]).forEach(s=>S[String(s.k)]=s); const cur=md.cur!=null?String(md.cur):null; const st=cur?S[cur]:null;
+  const arriving=cur?(md.procs||[]).find(p=>String(p.b)===cur&&!p.dash):null;
+  const left=document.createElement('div'); left.className='sf-sk';
+  if(csys){ left.appendChild(makeCycleSketch(Object.assign({},csys,{cur:cur,cap:null,focus:arriving?{t:arriving.dev,name:arriving.name||''}:null}))); }
+  const right=document.createElement('div'); right.className='sf-map'; const mp=makeCycleMap(Object.assign({},md,{compact:true}),false); right.appendChild(mp);
+  const en=document.createElement('button'); en.className='enl'; en.textContent='Enlarge ⤢'; en.onclick=ev=>{ ev.stopPropagation(); curMap=md; openTs('slidemap',md.title); }; right.appendChild(en);
+  const cap=document.createElement('div'); cap.className='sf-cap';
+  if(st){ cap.innerHTML='<b>Where are we?</b> State '+esc(st.alias||st.k)+': '+esc(fmtState(st))+'. '+esc(st.lab||'')+(arriving?' <span class="nxt"><b>How we got here:</b> '+esc((arriving.name||DEVNAME[arriving.dev]||arriving.dev)+', '+(S[String(arriving.a)]?(S[String(arriving.a)].alias||arriving.a):arriving.a)+' → '+(st.alias||st.k)+'. ')+esc(arriving.lab||DEVEXPL[arriving.dev]||'')+'</span>':''); }
+  else cap.innerHTML='<b>The loop so far.</b> '+esc(md.title||'');
+  w.append(left,right,cap); return w;
+}
 function makeCycleSketch(sys){
   // sys={dev:'cycle', layout:'rankine|reheat|regen-open|reheat-regen|cogen', cur, notes:{boiler:'…'}, cap, anim}
-  const L=CYCLE_LAYOUTS[sys.layout]||CYCLE_LAYOUTS.rankine; const W=720,H=L.H||360;
+  const L=CYCLE_LAYOUTS[sys.layout]||CYCLE_LAYOUTS.rankine; const W=720,H=L.H||360; const focus=sys.focus||null; const devMatch=d=>focus&&(d.t===focus.t||(focus.t==='fwh'&&d.t==='cfwh'&&focus.name&&/closed/i.test(focus.name)))&&(!focus.name||!d.lab||L.devs.filter(x=>x.t===d.t).length<2||new RegExp(d.lab.split('\\n')[0].replace(/[^A-Za-z]/g,''),'i').test(focus.name));
   const wrap=document.createElement('div'); wrap.className='sysk cycle';
   const ns='http://www.w3.org/2000/svg'; const svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); wrap.appendChild(svg);
   const cs=getComputedStyle(document.documentElement), C={fg:cs.getPropertyValue('--fg').trim(),mu:cs.getPropertyValue('--muted').trim(),or:cs.getPropertyValue('--orange').trim(),nv:cs.getPropertyValue('--navy').trim(),pn:cs.getPropertyValue('--panel').trim()};
@@ -804,6 +830,7 @@ function makeCycleSketch(sys){
       e('text',{x:d.x,y:d.y+R+14,'text-anchor':'middle','font-size':10.5,fill:col,'font-weight':800},d.lab||'PUMP'); }
     else if(d.t==='throttle'){ e('rect',{x:d.x-14,y:d.y-12,width:28,height:24,fill:C.pn,stroke:col,'stroke-width':2.5}); e('line',{x1:d.x-12,y1:d.y-10,x2:d.x+12,y2:d.y+10,stroke:col,'stroke-width':3}); e('line',{x1:d.x-12,y1:d.y+10,x2:d.x+12,y2:d.y-10,stroke:col,'stroke-width':3}); e('text',{x:d.x+20,y:d.y+4,'font-size':10.5,fill:col,'font-weight':700},d.lab||'VALVE'); }
     else { e('rect',{x:d.x,y:d.y,width:d.w,height:d.h,rx:8,fill:'none',stroke:col,'stroke-width':3}); const lab=(d.lab||{fwh:'OPEN FWH',cfwh:'CLOSED FWH',mix:'MIXING',heater:'PROCESS HEATER'}[d.t]||d.t.toUpperCase()); const lines=lab.split('\n'); lines.forEach((t,i)=>e('text',{x:d.x+d.w/2,y:d.y+d.h/2+4+(i-(lines.length-1)/2)*13,'text-anchor':'middle','font-size':11,fill:col,'font-weight':800},t)); }
+    if(focus){ const on=devMatch(d); g.setAttribute('opacity',on?1:.38); if(on){ const halo=document.createElementNS(ns,'rect'); const bb={x:d.x-(d.r||0)-8,y:d.y-(d.r||0)-8,w:(d.w||2*(d.r||14))+16,h:(d.h||2*(d.r||14))+16}; if(d.t==='pump'){ bb.x=d.x-(d.r||18)-8; bb.y=d.y-(d.r||18)-8; bb.w=bb.h=2*(d.r||18)+16; } if(d.t==='throttle'){ bb.x=d.x-22; bb.y=d.y-20; bb.w=44; bb.h=40; } halo.setAttribute('x',bb.x); halo.setAttribute('y',bb.y); halo.setAttribute('width',bb.w); halo.setAttribute('height',bb.h); halo.setAttribute('rx',12); halo.setAttribute('fill','none'); halo.setAttribute('stroke',C.or); halo.setAttribute('stroke-width',3); halo.setAttribute('stroke-dasharray','6 4'); g.insertBefore(halo,g.firstChild); } }
     g.addEventListener('click',ev=>{ ev.stopPropagation(); const name=(d.lab||DEVNAME[d.t]||d.t).replace(/\n/g,' '); expl.hidden=false; expl.innerHTML='<b>'+esc(DEVNAME[d.t]&&!(d.lab||'').includes(' ')?(DEVNAME[d.t]+(d.lab?' ('+name+')':'')):name)+'</b> '+esc((sys.notes&&sys.notes[d.id||d.t])||DEVEXPL[d.t]||''); });
     return g; }
   L.devs.forEach(devGroup);
